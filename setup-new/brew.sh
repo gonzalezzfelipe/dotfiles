@@ -34,8 +34,6 @@ brew install libomp
 brew install openblas
 brew install coreutils  # (realpath, etc)
 
-# Languages: Rust, Python3, R, latex, node, java
-brew install rust  # We need this for Alacritty
 brew install python3
 read -p "Do you want to install python2 (y/n)? " -n 1 -r
 echo
@@ -58,21 +56,18 @@ if ! type "tlmgr" > /dev/null 2>&1; then
         fi
     fi
 fi
-read -p "Do you want to install R (y/n)? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    brew install R --with-openblas
-fi
 read -p "Do you want to install Node.js (y/n)? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     brew install node
 fi
 
-# Neovim and tmux latest versions
-brew tap neovim/neovim
-brew install --HEAD neovim
+# Tmux latest versions
 brew install --HEAD tmux
+
+# Install Atom
+brew tap caskroom/cask
+brew cask install atom
 
 # Databases
 brew install postgresql

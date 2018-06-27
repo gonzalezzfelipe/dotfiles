@@ -1,0 +1,263 @@
+# Snippets, work related.
+
+'.source.python':
+  'if __name__ == \'__main__\'':
+    'prefix': 'ifname'
+    'body': 'if __name__ == \'__main__\':\n \t'
+  'fault':
+    'prefix': 'fault'
+    'body': '''
+    SELECT
+
+    FROM
+      hive.fault.all_events_monthly
+    WHERE
+      app_partition = {app_id}
+      AND ref_type_partition = '{ref_type}'
+      AND month_partition BETWEEN '{start_date:%Y%m}' AND '{end_date:%Y%m}'
+      AND date >= '{start_date:%Y-%m-%d}T00:00:00.000Z'
+      AND date <= '{end_date:%Y-%m-%d}T23:59:59.999Z'
+      AND lower(element_at(other_params, 'device_countrycode')) = '{device_countrycode}'
+      '''
+  'aleph':
+    'prefix': 'aleph'
+    'body': '''
+    SELECT
+
+    FROM
+      hive.aleph.events_daily
+    WHERE
+      app_partition = {app_id}
+      AND day BETWEEN '{start_date:%Y%m%d}' AND '{end_date:%Y%m%d}'
+      AND lower(element_at(params, 'device_countrycode')) = '{device_countrycode}'
+      AND action_id IN ({action_ids_str})
+    '''
+  'tpu_org':
+    'prefix': 'tpu_org'
+    'body': '''
+    monthly_purchases AS (
+      SELECT
+        lower(ref_hash) AS device_id,
+        {% if tpu_by == 'count' %}
+        COUNT(event_id) AS aggregating_value
+        {% elif tpu_by == 'value'%}
+        SUM(agg_value) AS aggregating_value
+        {% endif %}
+      FROM
+        hive.fault.all_events_monthly
+      WHERE
+        month_partition BETWEEN '{start_date:%Y%m}' AND '{end_date:%Y%m}'
+        AND ref_type_partition = '{ref_type}'
+        AND app_partition = {app_id}
+        AND event_id = {{ tpu_event }}
+        AND date >= '{start_date:%Y-%m-%d}T00:00:00.000Z'
+        AND date <= '{end_date:%Y-%m-%d}T23:59:59.999Z'
+        {% if device_countrycode is not none %}
+          AND lower(element_at(other_params, 'device_countrycode')) =
+            '{{device_countrycode}}'
+        {% endif %}
+      GROUP BY 1
+    ),
+    top_monthly_users AS (
+      SELECT
+        device_id
+      FROM (
+        SELECT
+          device_id,
+          aggregating_value,
+          approx_percentile(aggregating_value, {{ tpu_perc }}) over ()
+            AS percentile
+        FROM
+          monthly_purchases
+        ORDER BY
+          aggregating_value DESC
+      )
+      WHERE
+        aggregating_value > percentile
+        AND aggregating_value >= 1
+    )
+    '''
+  'tpu_atr':
+    'prefix': 'tpu_atr'
+    'body': '''
+    monthly_purchases AS (
+      SELECT
+        lower(element_at(device_ids, '{ref_type}')) AS device_id,
+        {% if tpu_by == "count" %}
+        COUNT(event_id) AS aggregating_value
+        {% elif tpu_by == "value"%}
+        SUM(value) AS aggregating_value
+        {% endif %}
+      FROM
+        hive.aleph.events_daily
+      WHERE
+        day BETWEEN '{start_date:%Y%m%d}' AND '{end_date:%Y%m%d}'
+        AND app_partition = {app_id}
+        AND event_id = {tpu_event}
+        {% if device_countrycode is not none %}
+          AND lower(element_at(params, 'device_countrycode')) =
+            '{{device_countrycode}}'
+        {% endif %}
+        {% if action_ids is not none %}
+          AND action_id IN ({action_ids_str})
+        {% endif %}
+      GROUP BY 1
+    ),
+    top_monthly_users AS (
+      SELECT
+        device_id
+      FROM (
+        SELECT
+          device_id,
+          aggregating_value,
+          approx_percentile(aggregating_value, {{ tpu_perc }}) over ()
+            AS percentile
+        FROM
+          monthly_purchases
+        ORDER BY
+          aggregating_value DESC
+      )
+      WHERE
+        aggregating_value > percentile
+        AND aggregating_value >= 1
+    )
+    '''
+  'args':
+    'prefix': 'args'
+    'body':'''
+import datetime as dt
+app_id =
+start_date = dt.datetime()
+end_date = dt.datetime()
+atr_or_organic =
+cohort =
+cohort_window =
+campaign_group_ids = []
+campaign_ids = []
+action_ids = []
+tpu =
+tpu_perc =
+tpu_by =
+tpu_event =
+device_countrycode =
+advertiser_name =
+save_at_gd ='''
+  'param_type':
+    'prefix': 'param_type'
+    'body': ':param arg:\n:type arg:'
+'.source.sql':
+  'fault':
+    'prefix': 'fault'
+    'body': '''
+    SELECT
+
+    FROM
+      hive.fault.all_events_monthly
+    WHERE
+      app_partition = {app_id}
+      AND ref_type_partition = {ref_type}
+      AND month_partition BETWEEN '{start_date:%Y%m}' AND '{end_date:%Y%m}'
+      AND date >= '{start_date:%Y-%m-%d}T00:00:00.000Z'
+      AND date <= '{end_date:%Y-%m-%d}T23:59:59.999Z'
+      '''
+  'aleph':
+    'prefix': 'aleph'
+    'body': '''
+    SELECT
+
+    FROM
+      hive.aleph.events_daily
+    WHERE
+      app_partition = {app_id}
+      AND day BETWEEN '{start_date:%Y%m%d}' AND '{end_date:%Y%m%d}'
+    '''
+  'tpu_org':
+    'prefix': 'tpu_org'
+    'body': '''
+    monthly_purchases AS (
+      SELECT
+        lower(ref_hash) AS device_id,
+        {% if tpu_by == 'count' %}
+        COUNT(event_id) AS aggregating_value
+        {% elif tpu_by == 'value'%}
+        SUM(agg_value) AS aggregating_value
+        {% endif %}
+      FROM
+        hive.fault.all_events_monthly
+      WHERE
+        month_partition BETWEEN '{start_date:%Y%m}' AND '{end_date:%Y%m}'
+        AND ref_type_partition = '{ref_type}'
+        AND app_partition = {app_id}
+        AND event_id = {{ tpu_event }}
+        AND date >= '{start_date:%Y-%m-%d}T00:00:00.000Z'
+        AND date <= '{end_date:%Y-%m-%d}T23:59:59.999Z'
+        {% if device_countrycode is not none %}
+          AND lower(element_at(other_params, 'device_countrycode')) =
+            '{{device_countrycode}}'
+        {% endif %}
+      GROUP BY 1
+    ),
+    top_monthly_users AS (
+      SELECT
+        device_id
+      FROM (
+        SELECT
+          device_id,
+          aggregating_value,
+          approx_percentile(aggregating_value, {{ tpu_perc }}) over ()
+            AS percentile
+        FROM
+          monthly_purchases
+        ORDER BY
+          aggregating_value DESC
+      )
+      WHERE
+        aggregating_value > percentile
+        AND aggregating_value >= 1
+    )
+    '''
+  'tpu_atr':
+    'prefix': 'tpu_atr'
+    'body': '''
+    monthly_purchases AS (
+      SELECT
+        lower(element_at(device_ids, '{ref_type}')) AS device_id,
+        {% if tpu_by == "count" %}
+        COUNT(event_id) AS aggregating_value
+        {% elif tpu_by == "value"%}
+        SUM(value) AS aggregating_value
+        {% endif %}
+      FROM
+        hive.aleph.events_daily
+      WHERE
+        day BETWEEN '{start_date:%Y%m%d}' AND '{end_date:%Y%m%d}'
+        AND app_partition = {app_id}
+        AND event_id = {tpu_event}
+        {% if device_countrycode is not none %}
+          AND lower(element_at(params, 'device_countrycode')) =
+            '{{device_countrycode}}'
+        {% endif %}
+        {% if action_ids is not none %}
+          AND action_id IN ({action_ids_str})
+        {% endif %}
+      GROUP BY 1
+    ),
+    top_monthly_users AS (
+      SELECT
+        device_id
+      FROM (
+        SELECT
+          device_id,
+          aggregating_value,
+          approx_percentile(aggregating_value, {{ tpu_perc }}) over ()
+            AS percentile
+        FROM
+          monthly_purchases
+        ORDER BY
+          aggregating_value DESC
+      )
+      WHERE
+        aggregating_value > percentile
+        AND aggregating_value >= 1
+    )
+    '''

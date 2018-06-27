@@ -60,22 +60,13 @@ if type "go" > /dev/null 2>&1; then
 fi
 
 # Set editor to nvim and use it as a manpager
-export EDITOR=nvim
-export MANPAGER="nvim -c 'set ft=man' -"
+export EDITOR=atom
 
 # Set shell to latest bash (this should be redundant if we previously ran
 # `sudo chsh -s $(brew --prefix)/bin/bash`)
 if [ -f "$brew_dir/bin/bash" ]; then
     export SHELL="$brew_dir/bin/bash"
 fi
-
-# R libraries (note: first create this folder if it doesn't exist)
-if type "R" > /dev/null 2>&1; then
-    export R_LIBS_USER="$brew_dir/lib/R/site-library"
-fi
-
-# Disable control flow (necessary to enable C-s bindings in vim)
-stty -ixon
 
 # History settings
 HISTCONTROL=ignoreboth:erasedups  # avoid duplicates
@@ -211,24 +202,6 @@ if type "R" > /dev/null 2>&1; then
     alias R='R --no-save --quiet'
 fi
 
-# Git (similar to vim's fugitive); also bind auto-complete functions to each
-# alias
-if type "git" > /dev/null 2>&1; then
-    alias gs='git status'
-    alias gco='git checkout'
-    _completion_loader git
-    __git_complete gco _git_checkout
-    alias gcp='git cherry-pick'
-    alias gb='git branch'
-    __git_complete gb _git_branch
-    alias gp='git push'
-    __git_complete gp _git_push
-    alias gP='git pull'
-    __git_complete gp _git_pull
-    alias gdr='git push origin --delete'
-    __git_complete gdr _git_push
-fi
-
 # Python
 if [ ! -f "$brew_dir"/bin/python2 ]; then
     alias python='python3'
@@ -241,24 +214,6 @@ if type "ipython3" > /dev/null 2>&1; then
     alias ip='ipython3'
 fi
 
-# Update all binaries (with brew) and language libraries
-ua='sudo echo -n; brew update && brew upgrade && brew cleanup; '\
-'python3 -m pip_review --interactive'
-if [ -f "$brew_dir"/bin/python2 ]; then
-    ua=$ua';python2 -m pip_review --interactive'
-fi
-if type "R" > /dev/null 2>&1; then
-    ua=$ua'; R --slave --no-save --no-restore -e '\
-'"update.packages(ask=TRUE, checkBuilt=TRUE)"'
-fi
-if type "tlmgr" > /dev/null 2>&1; then
-    ua=$ua'; sudo tlmgr update --all'
-fi
-if type "npm" > /dev/null 2>&1; then
-    ua=$ua'; npm update -g'
-fi
-alias ua="$ua"
-
 if [[ "$OSTYPE" == 'darwin'* ]]; then
     # Differentiate and use colors for directories, symbolic links, etc.
     alias ls='ls -GF'
@@ -266,45 +221,26 @@ if [[ "$OSTYPE" == 'darwin'* ]]; then
     # Change directory and list files
     cd() { builtin cd "$@" && ls -GF; }
 
-    # Matlab
-    alias matlab='/Applications/MATLAB_R2015b.app/bin/matlab -nodisplay '\
-'-nodesktop -nosplash '
-
-    # Alias to open vim/nvim sourcing minimal vimrc file
-    alias mvrc='vim -u $HOME/git-repos/private/dotfiles/vim/vimrc_min'
-    alias mnvrc='nvim -u $HOME/git-repos/private/dotfiles/vim/vimrc_min'
-
-    # Start Tmux attaching to an existing session named petobens or creating one
+    # Start Tmux attaching to an existing session named fgon or creating one
     # with such name (we also indicate the tmux.conf file location)
-    alias tm='tmux -f "$HOME/.tmux/tmux.conf" new -A -s petobens'
+    alias tm='tmux -f "$HOME/.tmux/tmux.conf" new -A -s fgon'
 
     # SSH and Tmux: connect to emr via ssh and then start tmux creating a new
     # session called pedrof or attaching to an existing one with that name.
-    # Add -X after ssh to enable X11 forwarding
-    alias emr='ssh pedrof@prd-amber-pivot.jampp.com -t '\
-'tmux new -A -s pedrof'
     # Presto client
+    # TODO: Change this to own credentials
     alias pcli='ssh pedrof@prd-amber-pivot.jampp.com -t '\
 'tmux new -A -s pedrof '\
 '"presto-cli\ --server\ emr-prd-queries.jampp.com:8889\ --catalog\ hive\ '\
 '--schema\ aleph\ --user\ pedrof"'
-    # Gerry instance (with tmux)
-    alias ui='ssh gerry'
-    # When using linux brew we need to specify a full path to the tmux
-    # executable
-    alias utm='ssh gerry -t /mnt/.linuxbrew/bin/tmux -f'\
-'"/home/ubuntu/.tmux/tmux.conf" new -A -s pedrof'
 
 else
     # Differentiate and use colors for directories, symbolic links, etc.
     alias ls='ls -F --color=auto'
     # Change directory and list files
     cd() { builtin cd "$@" && ls -F --color=auto; }
-    # Update packages (using apt-get)
-    alias aptu='sudo apt-get update && sudo apt-get dist-upgrade && sudo '\
-'apt-get autoremove'
     # Open tmux loading config file
-    alias tm='tmux -f "$HOME/.tmux/tmux.conf" new -A -s pedrof'
+    alias tm='tmux -f "$HOME/.tmux/tmux.conf" new -A -s fgon'
 fi
 
 # }}}

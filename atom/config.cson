@@ -1,0 +1,25 @@
+# Makes seti-ui and an-old-hope-syntax to start on app open. Also,
+# sets large file warning at a lower level as to avoid crashes.
+
+"*":
+  "autocomplete-python":
+    useKite: false
+  core:
+    telemetryConsent: "limited"
+    themes: [
+      "seti-ui"
+      "an-old-hope-syntax"
+    ]
+    warnOnLargeFileLimit: 5
+  editor:
+    fontSize: 11
+    scrollPastEnd: true
+  "exception-reporting":
+    userId: "92585b55-4ecc-4346-8f5e-c7a390bd1b7d"
+  "seti-ui":
+    compactView: true
+    fileIcons: false
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false

@@ -1,0 +1,48 @@
+// Few changes to make 'an-old-hope-syntax' get along with 'set-ui'
+
+atom-text-editor {
+  background-color: #0F1112;
+  }
+atom-text-editor::shadow .gutter {
+  background-color: #080A0C;
+  }
+
+// Make inacntive pane darker, as to highlight actual pane.
+  .pane {
+    .gutter,
+    ul.tab-bar {
+      opacity: 0.4;
+    }
+  }
+
+// Make active pane have the gutter line number with light blue to highlight.
+  .pane.active {
+    .gutter {
+      color: #7cbddd;
+      opacity: 1;
+    }
+
+// Make active pane filename have seti light blue font color.
+  ul.tab-bar {
+    opacity: 1;
+      .tab.active {
+        background-color: #33383d;
+      }
+    }
+
+// highlight current line on gutter.
+    .gutter .line-number.cursor-line {
+      color: #BEE4F7;
+    }
+
+// Add different color to folded lines.
+    .gutter .line-number.folded {
+      color: #bee4f7;
+      background-color: #1d2d35;
+    }
+  }
+
+// highlight root project folder
+atom-workspace.seti-compact atom-panel-container .project-root > .header {
+  color: #dddddd;
+}

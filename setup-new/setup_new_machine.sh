@@ -75,21 +75,19 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     ipython3 kernel install
 fi
 
+read -p "Do you want to install atom packages (y/n)? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo Setting up atom configuration...
+    . "$current_dir/atom.sh"
+fi
+
 if type "tlmgr" > /dev/null 2>&1; then
     read -p "Do you want to install LaTeX packages (y/n)? " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo Installing Latex packages...
         . "$current_dir/latex.sh"
-    fi
-fi
-
-if type "R" > /dev/null 2>&1; then
-    read -p "Do you want to install R libraries (y/n)? " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo Installing R libraries...
-        . "$current_dir/R.sh"
     fi
 fi
 
@@ -102,22 +100,12 @@ if type "npm" > /dev/null 2>&1; then
     fi
 fi
 
-read -p "Do you want to install extra Ruby libraries (y/n)? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo Installing Ruby libraries...
-    sudo gem install sqlint --conservative
-fi
-
 read -p "Do you want to generate symlinks to these dotfiles? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo Generating symlinks...
     . "$current_dir/symlinks.sh"
 fi
-
-echo Installing nvim packages...
-nvim +qall
 
 read -p "Do you want to install extra settings? " -n 1 -r
 echo

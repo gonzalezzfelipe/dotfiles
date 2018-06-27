@@ -41,36 +41,10 @@ if type "ctags" > /dev/null 2>&1; then
     ln -s "$dotfiles_dir/ctags" "$HOME/.ctags"
     echo Created .ctags symlink
 fi
-if type "python" > /dev/null 2>&1; then
-    rm -rf "$HOME/.pdbrc"
-    ln -s "$dotfiles_dir/python/pdbrc" "$HOME/.pdbrc"
-    echo Created .pdbrc symlink
-    rm -rf "$HOME/.ipython/profile_default/ipython_config.py"
-    ln -s "$dotfiles_dir/python/ipython_config.py" "$HOME/.ipython/profile_default/ipython_config.py"
-    echo Created .ipython_config symlink
-    rm -rf "$HOME/.ipython/profile_default/startup/ipython_startup.py"
-    ln -s "$dotfiles_dir/python/ipython_startup.py" "$HOME/.ipython/profile_default/startup/ipython_startup.py"
-    echo Created .ipython_startup symlink
-fi
 if type "tmux" > /dev/null 2>&1; then
     rm -rf "$HOME/.tmux"
     ln -s "$dotfiles_dir/tmux" "$HOME/.tmux"
     echo Created .tmux folder symlink
-fi
-if type "nvim" > /dev/null 2>&1; then
-    rm -rf "$HOME/.vim"
-    ln -s "$dotfiles_dir/vim/" "$HOME/.vim"
-    echo Created .vim folder symlink
-    rm -rf "$HOME/.vimrc"
-    ln -s "$dotfiles_dir/vimrc" "$HOME/.vimrc"
-    echo Created .vimrc symlink
-    mkdir -p "$HOME/.config/"
-    rm -rf "$HOME/.config/nvim"
-    ln -s "$dotfiles_dir/vim/" "$HOME/.config/nvim"
-    echo Created ./config/nvim folder symlink
-    rm -rf "$HOME/.config/nvim/init.vim"
-    ln -s "$dotfiles_dir/vimrc" "$HOME/.config/nvim/init.vim"
-    echo Created .init.vim symlink
 fi
 if type "vint" > /dev/null 2>&1; then
     rm -rf "$HOME/.vintrc.yaml"
@@ -82,30 +56,10 @@ if type "eslint" > /dev/null 2>&1; then
     ln -s "$dotfiles_dir/linters/eslintrc.yaml" "$HOME/.eslintrc.yaml"
     echo Created .eslintrc.yaml symlink
 fi
-if type "R" > /dev/null 2>&1; then
-    rm -rf "$HOME/.Rprofile"
-    ln -s "$dotfiles_dir/Rprofile" "$HOME/.Rprofile"
-    echo Created .Rprofile symlink
-fi
 if type "powerline-daemon" > /dev/null 2>&1; then
     rm -rf  "$HOME/.config/powerline"
     ln -s "$dotfiles_dir/config/powerline" "$HOME/.config/powerline"
     echo Created .config/powerline folder symlink
-fi
-if type "arara" > /dev/null 2>&1; then
-    rm -rf "$HOME/.arararc.yaml"
-    ln -s "$dotfiles_dir/arararc.yaml" "$HOME/.arararc.yaml"
-    echo Created .arararc.yaml symlink
-fi
-if type "mutt" > /dev/null 2>&1; then
-    rm -rf "$HOME/.config/mutt"
-    ln -s "$dotfiles_dir/config/mutt" "$HOME/.config/mutt"
-    echo Created .config/mutt folder symlink
-fi
-if type "ranger" > /dev/null 2>&1; then
-    rm -rf "$HOME/.config/ranger"
-    ln -s "$dotfiles_dir/config/ranger" "$HOME/.config/ranger"
-    echo Created .config/ranger folder symlink
 fi
 if type "tern" > /dev/null 2>&1; then
     rm -rf "$HOME/.tern-config"
@@ -123,21 +77,6 @@ if type "pip" > /dev/null 2>&1; then
     echo Created .config/pip folder symlink
 fi
 
-rm -rf "$HOME/.surfingkeysrc"
-ln -s "$dotfiles_dir/surfingkeysrc.js" "$HOME/.surfingkeysrc"
-echo Created .surfingkeysrc symlink
-
-rm -rf "$HOME/.config/alacritty"
-ln -s "$dotfiles_dir/config/alacritty" "$HOME/.config/alacritty"
-echo Created .config/alacritty folder symlink
-
-if [[ "$OSTYPE" == 'darwin'* ]]; then
-    if open -Ra "hammerspoon" ; then
-        rm -rf "$HOME/.hammerspoon"
-        ln -s "$dotfiles_dir/hammerspoon" "$HOME/.hammerspoon"
-        echo Created .hammerspoon folder symlink
-    fi
-fi
 if type "git" > /dev/null 2>&1; then
     rm -rf "$HOME/.gitignore"
     ln -s "$dotfiles_dir/gitignore" "$HOME/.gitignore"
