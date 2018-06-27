@@ -5,6 +5,9 @@
   "autocomplete-python":
     useKite: false
   core:
+    disabledPackages: [
+      "markdown-preview"
+    ]
     telemetryConsent: "limited"
     themes: [
       "seti-ui"
@@ -16,6 +19,8 @@
     scrollPastEnd: true
   "exception-reporting":
     userId: "92585b55-4ecc-4346-8f5e-c7a390bd1b7d"
+  "markdown-preview-plus":
+    useGitHubStyle: true
   "seti-ui":
     compactView: true
     fileIcons: false
