@@ -45,6 +45,7 @@
       AND created >= '{start_date:%Y-%m-%d}T00:00:00.000Z'
       AND created <= '{end_date:%Y-%m-%d}T23:59:59.999Z'
       AND lower(device_countrycode) = '{device_countrycode}'
+      AND NOT implicit
       '''
   'aleph_events':
     'prefix': 'aleph_events'
@@ -215,6 +216,15 @@
   'logging_info':
     'prefix': 'logging_info'
     'body': 'import logging\nlogging.basicConfig(level=logging.INFO)'
+  'logging_with_logger_config':
+    'prefix': 'logging_with_logger_config'
+    'body': 'logger = logging.getLogger(__name__)\nlogging.config.dictConfig(logger_config)'
+  'read_query':
+    'prefix': 'read_query'
+    'body': "with open('query_file', 'r') as _query:\n\tquery = _query.read()"
+  'line_break':
+    'prefix': 'line_break'
+    'body': '########################################################################'
 '.source.sql':
   'fault_events':
     'prefix': 'fault_events'
