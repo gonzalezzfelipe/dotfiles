@@ -20,6 +20,13 @@
   "linter-ui-default": {}
   "markdown-preview-plus":
     useGitHubStyle: true
+  "multi-wrap-guide":
+    columns: [
+      73
+      77
+      80
+    ]
+    locked: true
   "seti-ui":
     compactView: true
     fileIcons: false
@@ -27,8 +34,3 @@
     hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
-  'multi-wrap-guide':
-    'columns': [
-      73
-      77
-      80]
