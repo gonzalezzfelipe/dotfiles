@@ -28,3 +28,5 @@
   'ctrl-a ctrl-a': 'move-panes:move-left'
   'ctrl-a ctrl-w': 'move-panes:move-up'
   'ctrl-a ctrl-s': 'move-panes:move-down'
+  'alt-f': 'jumpy:toggle'
+  'escape': 'jumpy:clear'

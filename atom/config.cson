@@ -34,3 +34,6 @@
     hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
+  'jumpy':
+    fontSize: 1
+    matchPattern: "([A-Z]+([0-9a-z])*)|[a-z0-9]{6,}"
