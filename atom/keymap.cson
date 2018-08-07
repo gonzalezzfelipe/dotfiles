@@ -30,3 +30,14 @@
   'ctrl-a ctrl-s': 'move-panes:move-down'
   'alt-f': 'jumpy:toggle'
   'escape': 'jumpy:clear'
+
+'atom-workspace atom-text-editor:not(.mini),
+.tree-view':
+    'shift-enter': 'unset!'
+
+'atom-workspace atom-text-editor.jumpy-jump-mode.jumpy-more-specific1.jumpy-more-specific2,
+.tree-view.jumpy-jump-mode.jumpy-more-specific1.jumpy-more-specific2':
+    'backspace': 'unset!'
+    'enter': 'unset!'
+    'space': 'unset!'
+    'shift-enter': 'unset!'
