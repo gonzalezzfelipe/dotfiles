@@ -2,10 +2,6 @@
   "autocomplete-python":
     useKite: false
   core:
-    disabledPackages: [
-      "markdown-preview"
-      "wrap-guide"
-    ]
     telemetryConsent: "limited"
     themes: [
       "seti-ui"

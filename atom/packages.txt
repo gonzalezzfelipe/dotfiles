@@ -2,9 +2,11 @@ an-old-hope-syntax@1.0.4
 atom-file-icons@0.6.0
 atom-html-preview@0.2.5
 autocomplete-python@1.10.5
+busy-signal
 dash@1.7.1
 docblock-python
 git-plus@7.10.2
+intentions
 jumpy
 language-generic-config
 line-jumper

@@ -29,7 +29,6 @@
   'ctrl-a ctrl-w': 'move-panes:move-up'
   'ctrl-a ctrl-s': 'move-panes:move-down'
   'alt-f': 'jumpy:toggle'
-  'escape': 'jumpy:clear'
 
 'atom-workspace atom-text-editor:not(.mini),
 .tree-view':
