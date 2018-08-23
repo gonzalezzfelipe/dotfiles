@@ -30,6 +30,25 @@
   'ctrl-a ctrl-s': 'move-panes:move-down'
   'alt-f': 'jumpy:toggle'
 
+'.tree-view':
+    'shift-enter': 'unset!'
+    'a': 'nerd-treeview:add-file'
+    'A': 'nerd-treeview:add-folder'
+    'D': 'nerd-treeview:remove'
+    'Y': 'nerd-treeview:copy-full-path'
+    'y n': 'nerd-treeview:copy-name'
+    'y N': 'nerd-treeview:copy-name-ext'
+    'm m': 'nerd-treeview:move'
+    'm p': 'nerd-treeview:paste'
+    'y p': 'nerd-treeview:duplicate'
+    'y y': 'nerd-treeview:copy'
+    'd d': 'nerd-treeview:cut'
+    '/': 'nerd-treeview:search'
+    '?': 'nerd-treeview:reverse-search'
+    'n': 'nerd-treeview:repeat-search'
+    'N': 'nerd-treeview:repeat-search-backwards'
+    ':': 'nerd-treeview:search-clear-highlight'
+
 'atom-workspace atom-text-editor:not(.mini),
 .tree-view':
     'shift-enter': 'unset!'

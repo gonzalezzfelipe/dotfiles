@@ -2,6 +2,13 @@
   "autocomplete-python":
     useKite: false
   core:
+    disabledPackages: [
+      "markdown-preview"
+      "wrap-guide"
+    ]
+    packagesWithKeymapsDisabled: [
+      "nerd-treeview"
+    ]
     telemetryConsent: "limited"
     themes: [
       "seti-ui"
@@ -11,8 +18,12 @@
   editor:
     fontSize: 11
     scrollPastEnd: true
+    softWrap: true
   "exception-reporting":
     userId: "92585b55-4ecc-4346-8f5e-c7a390bd1b7d"
+  jumpy:
+    fontSize: 1
+    matchPattern: "([A-Z]+([0-9a-z])*)|[a-z0-9]{6,}"
   "linter-ui-default": {}
   "markdown-preview-plus":
     useGitHubStyle: true
@@ -26,10 +37,9 @@
   "seti-ui":
     compactView: true
     fileIcons: false
-  "tree-view":
-    hideVcsIgnoredFiles: true
+  "tree-view": {}
+  "tree-view-filter":
+    caseInsensitive: true
+    liveUpdate: true
   welcome:
     showOnStartup: false
-  'jumpy':
-    fontSize: 1
-    matchPattern: "([A-Z]+([0-9a-z])*)|[a-z0-9]{6,}"
