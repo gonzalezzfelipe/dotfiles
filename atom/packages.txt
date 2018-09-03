@@ -18,6 +18,7 @@ markdown-preview-plus
 move-panes@0.2.0
 multi-wrap-guide
 nerd-treeview
+no-caffeine-syntax
 pane-split-moves-tab@0.1.0
 paner@1.0.0
 pretty-json@2.0.1

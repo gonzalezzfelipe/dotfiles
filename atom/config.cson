@@ -1,4 +1,7 @@
 "*":
+  "atom-beautify":
+    general:
+      _analyticsUserId: "77d7b41c-0f08-4283-aca7-bf19d5103191"
   "autocomplete-python":
     useKite: false
   core:
@@ -12,7 +15,7 @@
     telemetryConsent: "limited"
     themes: [
       "seti-ui"
-      "an-old-hope-syntax"
+      "no-caffeine-syntax"
     ]
     warnOnLargeFileLimit: 5
   editor:
@@ -24,7 +27,8 @@
   jumpy:
     fontSize: 1
     matchPattern: "([A-Z]+([0-9a-z])*)|[a-z0-9]{6,}"
-  "linter-ui-default": {}
+  "linter-ui-default":
+    panelHeight: 99
   "markdown-preview-plus":
     useGitHubStyle: true
   "multi-wrap-guide":

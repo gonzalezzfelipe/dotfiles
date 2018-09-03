@@ -1,5 +1,11 @@
 # Key bindings that match the ones used by petobens on Tmux.
 
+'body':
+  'ctrl-a up': 'pane:split-up-and-copy-active-item'
+  'ctrl-a down': 'pane:split-down-and-copy-active-item'
+  'ctrl-a left': 'pane:split-left-and-copy-active-item'
+  'ctrl-a right': 'pane:split-right-and-copy-active-item'
+
 'atom-text-editor':
   'ctrl-a b': 'application:new-file'
   'ctrl-a r': 'tree-view:rename'
