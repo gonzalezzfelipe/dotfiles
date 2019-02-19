@@ -37,7 +37,7 @@ brew cask install font-sourcecodepro-nerd-font
 brew cask install font-source-code-pro
 
 echo Installing Python3 modules...
-pip3 install -r "$parent_dir"/python/requirements.txt
+pip3 install --user -r "$parent_dir"/python/requirements.txt
 ipython3 kernel install
 
 echo Setting up atom configuration...
