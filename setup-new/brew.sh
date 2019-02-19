@@ -66,5 +66,8 @@ brew install bat
 brew install fd
 brew install tree
 
+# f.lux
+brew cask install flux
+
 # Remove outdated versions
 brew cleanup
