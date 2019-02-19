@@ -43,6 +43,10 @@ ipython3 kernel install
 echo Setting up atom configuration...
 . "$current_dir/atom.sh"
 
+
+. "$current_dir/.sh"
+
+
 read -p "Do you want to generate symlinks to these dotfiles? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then

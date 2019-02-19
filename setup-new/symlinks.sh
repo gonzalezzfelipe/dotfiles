@@ -28,7 +28,7 @@ echo Creating symlinks under "$HOME"/
 # First symlink bashrc and reload it without logging out and back in
 if type "zsh" > /dev/null 2>&1; then
     rm -rf "$HOME/.zshrc"
-    ln -s "$dotfiles_dir/zshrc" "$HOME/.zsh"
+    ln -s "$dotfiles_dir/zshrc" "$HOME/.zshrc"
     echo Created .zshrc symlink
 fi
 . "$HOME/.zshrc"

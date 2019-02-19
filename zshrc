@@ -169,9 +169,6 @@ if type "fzf" > /dev/null 2>&1; then
     # Disable tmux integration (use ncurses directly)
     export FZF_TMUX='0'
 
-    # Extend list of commands with fuzzy completion (basically add our aliases)
-    complete -F _fzf_path_completion -o default -o bashdefault v o dog
-
     # Alt-p mapping to cd to selected parent directory (sister to Alt-c)
     __fzf_cd_parent__() {
         local declare dirs=()
@@ -192,8 +189,6 @@ if type "fzf" > /dev/null 2>&1; then
             return 1
         fi
     }
-    bind '"\ep": "\C-x\C-addi`__fzf_cd_parent__`\C-x\C-e\C-x\C-r\C-m"'
-    bind -m vi-command '"\ep": "ddi`__fzf_cd_parent__`\C-x\C-e\C-x\C-r\C-m"'
 
     # Bookmarks (requires https://github.com/urbainvaes/fzf-marks)
     if [ -f "$brew_dir/opt/fzf/shell/fzf-marks.plugin.bash" ]; then
