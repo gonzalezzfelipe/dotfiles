@@ -9,8 +9,6 @@ matplotlib
 mycli; python_version >= '3.6'
 mypy; python_version >= '3.6'
 mysql-connector==2.1.6
-neovim; python_version >= '3.6'
-neovim-remote; python_version >= '3.6'
 numpy
 pandas
 pgcli; python_version >= '3.6'

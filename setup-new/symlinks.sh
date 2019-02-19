@@ -26,15 +26,12 @@ dotfiles_dir=${dotfiles_dir%/}
 echo Creating symlinks under "$HOME"/
 
 # First symlink bashrc and reload it without logging out and back in
-if type "bash" > /dev/null 2>&1; then
-    rm -rf "$HOME/.bashrc"
-    ln -s "$dotfiles_dir/bashrc" "$HOME/.bashrc"
-    echo Created .bashrc symlink
-    rm -rf "$HOME/.bash_profile"
-    ln -s "$dotfiles_dir/bash_profile" "$HOME/.bash_profile"
-    echo Created .bash_profile symlink
+if type "zsh" > /dev/null 2>&1; then
+    rm -rf "$HOME/.zshrc"
+    ln -s "$dotfiles_dir/zshrc" "$HOME/.zsh"
+    echo Created .zshrc symlink
 fi
-. "$HOME/.bashrc"
+. "$HOME/.zshrc"
 
 if type "ctags" > /dev/null 2>&1; then
     rm -rf "$HOME/.ctags"
@@ -46,57 +43,19 @@ if type "tmux" > /dev/null 2>&1; then
     ln -s "$dotfiles_dir/tmux" "$HOME/.tmux"
     echo Created .tmux folder symlink
 fi
-if type "vint" > /dev/null 2>&1; then
-    rm -rf "$HOME/.vintrc.yaml"
-    ln -s "$dotfiles_dir/linters/vintrc.yaml" "$HOME/.vintrc.yaml"
-    echo Created .vintrc.yaml symlink
-fi
-if type "eslint" > /dev/null 2>&1; then
-    rm -rf "$HOME/.eslintrc.yaml"
-    ln -s "$dotfiles_dir/linters/eslintrc.yaml" "$HOME/.eslintrc.yaml"
-    echo Created .eslintrc.yaml symlink
-fi
-if type "powerline-daemon" > /dev/null 2>&1; then
-    rm -rf  "$HOME/.config/powerline"
-    ln -s "$dotfiles_dir/config/powerline" "$HOME/.config/powerline"
-    echo Created .config/powerline folder symlink
-fi
-if type "tern" > /dev/null 2>&1; then
-    rm -rf "$HOME/.tern-config"
-    ln -s "$dotfiles_dir/linters/tern-config" "$HOME/.tern-config"
-    echo Created .tern-config symlink
-fi
-if type "htmlhint" > /dev/null 2>&1; then
-    rm -rf "$HOME/.htmlhintrc"
-    ln -s "$dotfiles_dir/linters/htmlhintrc" "$HOME/.htmlhintrc"
-    echo Created .htmlhintrc symlink
-fi
 if type "pip" > /dev/null 2>&1; then
     rm -rf "$HOME/.config/pip"
     ln -s "$dotfiles_dir/config/pip" "$HOME/.config/pip"
     echo Created .config/pip folder symlink
 fi
+rm -rf "$HOME/.gitignore"
+ln -s "$dotfiles_dir/gitignore" "$HOME/.gitignore"
+echo Created .gitignore symlink
 
-if type "git" > /dev/null 2>&1; then
-    rm -rf "$HOME/.gitignore"
-    ln -s "$dotfiles_dir/gitignore" "$HOME/.gitignore"
-    echo Created .gitignore symlink
-
-    read -p "Do you want to create new gitconfig file (y/n)? " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        rm -rf "$HOME/.gitconfig"
-        read -r -e -p "Enter git user name: " username
-        read -r -e -p "Enter git mail: " mail
-        if [[ "$OSTYPE" == 'darwin'* ]]; then
-            credential_helper='osxkeychain'
-        else
-            credential_helper='cache --timeout 3600'
-        fi
-        cat > "$HOME/.gitconfig" << EOF
+cat > "$HOME/.gitconfig" << EOF
 [user]
-    name = $username
-    email = $mail
+    name = gonzalezzfelipe
+    email = gonzalezz_felipe@hotmail.com
 [push]
     default = simple
 [core]
@@ -105,8 +64,6 @@ if type "git" > /dev/null 2>&1; then
 [web]
     browser = start
 [credential]
-    helper = $credential_helper
+    helper = osxkeychain
 EOF
-        echo Created .gitconfig file
-    fi
-fi
+echo Created .gitconfig file

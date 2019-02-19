@@ -22,83 +22,26 @@ if [[  "$OSTYPE" == 'darwin'* ]]; then
     fi
 fi
 
-read -p "Do you want to install brew packages (y/n)? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo Installing Brew packages...
-    . "$current_dir/brew.sh"
-    brew_dir=$(brew --prefix)
-fi
+echo Installing Brew packages...
+. "$current_dir/brew.sh"
+brew_dir=$(brew --prefix)
 
-read -p "Do you want to install tmux terminfo with italics support (y/n)? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo Installing Italics tmux terminfo...
-    tic "$parent_dir/tmux-xterm-256color-italic.terminfo"
-fi
+echo Installing Italics tmux terminfo...
+tic "$parent_dir/tmux-xterm-256color-italic.terminfo"
 
-read -p "Do you want to install Nerd fonts with fancy glyphs (y/n)? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo Installing Nerd Fonts...
-    if [[  "$OSTYPE" == 'darwin'* ]]; then
-        brew tap caskroom/fonts
-        brew cask install font-sourcecodepro-nerd-font
-        # Nerd fonts Source Code Pro version doesn't have italics so we install
-        # the official version
-        brew cask install font-source-code-pro
-    else
-        mkdir -p ~/.local/share/fonts
-        cd ~/.local/share/fonts || exit
-        curl -fLo "Sauce Code Pro Nerd Font Complete.ttf" \
-            https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/\
-            patched-fonts/SourceCodePro/Regular/complete/\
-            Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf
-        echo Installed Sauce Code Pro Nerd Font Complete.ttf font
-        # TODO: Add ubuntu installation instructions for official Source Code
-        # Pro
-        cd "$current_dir" || exit
-    fi
-fi
+echo Installing Nerd Fonts...
+brew tap caskroom/fonts
+brew cask install font-sourcecodepro-nerd-font
+# Nerd fonts Source Code Pro version doesn't have italics so we install
+# the official version
+brew cask install font-source-code-pro
 
-read -p "Do you want to install python modules (y/n)? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo Installing Python3 modules...
-    pip3 install -r "$parent_dir"/python/requirements.txt
-    if [  -f "$brew_dir"/bin/python2 ]; then
-        echo Installing Python2 modules...
-        pip install -r "$parent_dir"/python/requirements.txt
-        # Enable both python2 and python3 ipython kernels
-        ipython kernel install
-    fi
-    ipython3 kernel install
-fi
+echo Installing Python3 modules...
+pip3 install -r "$parent_dir"/python/requirements.txt
+ipython3 kernel install
 
-read -p "Do you want to install atom packages (y/n)? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo Setting up atom configuration...
-    . "$current_dir/atom.sh"
-fi
-
-if type "tlmgr" > /dev/null 2>&1; then
-    read -p "Do you want to install LaTeX packages (y/n)? " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo Installing Latex packages...
-        . "$current_dir/latex.sh"
-    fi
-fi
-
-if type "npm" > /dev/null 2>&1; then
-    read -p "Do you want to install node libraries (y/n)? " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo Installing Node.js libraries...
-        . "$current_dir/npm.sh"
-    fi
-fi
+echo Setting up atom configuration...
+. "$current_dir/atom.sh"
 
 read -p "Do you want to generate symlinks to these dotfiles? " -n 1 -r
 echo

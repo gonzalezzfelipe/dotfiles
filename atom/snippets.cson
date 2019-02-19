@@ -192,9 +192,6 @@
   'args':
     'prefix': 'args'
     'body':'''import datetime as dt\napp_id =\nstart_date = dt.datetime()\nend_date = dt.datetime()\natr_or_organic =\ncohort =\ncohort_window =\ncampaign_group_ids = []\ncampaign_ids = []\naction_ids = []\ntpu =\ntpu_perc =\ntpu_by =\ntpu_event =\ndevice_countrycode =\nadvertiser_name =\nsave_at_gd ='''
-  'param_type':
-    'prefix': 'param_type'
-    'body': ':param arg:\n:type arg:'
   'did_fault_events':
     'prefix': 'did_fault_events'
     'body': 'LOWER(ref_hash) AS device_id'

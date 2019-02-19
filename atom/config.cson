@@ -14,21 +14,16 @@
     ]
     telemetryConsent: "limited"
     themes: [
-      "seti-ui"
-      "no-caffeine-syntax"
+      "atom-dark"
+      "gruvbox-plus-syntax"
     ]
-    warnOnLargeFileLimit: 5
+    warnOnLargeFileLimit: 3
   editor:
     fontSize: 11
     scrollPastEnd: true
     softWrap: true
   "exception-reporting":
     userId: "92585b55-4ecc-4346-8f5e-c7a390bd1b7d"
-  jumpy:
-    fontSize: 1
-    matchPattern: "([A-Z]+([0-9a-z])*)|[a-z0-9]{6,}"
-  "linter-ui-default":
-    panelHeight: 99
   "markdown-preview-plus":
     useGitHubStyle: true
   "multi-wrap-guide":
@@ -36,6 +31,7 @@
       73
       77
       80
+      100
     ]
     locked: true
   "seti-ui":
