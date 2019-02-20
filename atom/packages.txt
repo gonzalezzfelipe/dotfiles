@@ -17,3 +17,7 @@ pane-split-moves-tab@0.1.0
 paner@1.0.0
 pretty-json@2.0.1
 string-theory
+
+linter-ui-default
+intentions
+busy-signal
