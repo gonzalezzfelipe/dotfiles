@@ -10,6 +10,7 @@
   'ctrl-a b': 'application:new-file'
   'ctrl-a r': 'tree-view:rename'
   'ctrl-a c': 'core:close'
+  'ctrl-a x': 'core:close'
   'ctrl-a s': 'pane:split-right-and-copy-active-item'
   'ctrl-a v': 'pane:split-down-and-copy-active-item'
   'ctrl-a ctrl-p': 'window:focus-pane-on-left'
