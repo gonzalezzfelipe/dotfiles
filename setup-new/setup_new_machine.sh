@@ -43,20 +43,12 @@ ipython3 kernel install
 echo Setting up atom configuration...
 . "$current_dir/atom.sh"
 
-
+echo Installing zsh...
 . "$current_dir/.sh"
 
 
-read -p "Do you want to generate symlinks to these dotfiles? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo Generating symlinks...
-    . "$current_dir/symlinks.sh"
-fi
+echo Generating symlinks...
+. "$current_dir/symlinks.sh"
 
-read -p "Do you want to install extra settings? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo Installing extra settings...
-    . "$current_dir/extras.sh"
-fi
+echo Installing extra settings...
+. "$current_dir/extras.sh"

@@ -3,6 +3,7 @@ parent_dir="$(dirname "$current_dir")"
 atom_dir="$parent_dir/atom"
 
 mkdir -p $atom_dir
+mkdir -p ~/.atom
 
 echo Installing atom packages ...
 apm install --packages-file $atom_dir/packages.txt

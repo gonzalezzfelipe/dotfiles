@@ -59,7 +59,7 @@ cat > "$HOME/.gitconfig" << EOF
 [push]
     default = simple
 [core]
-    editor = nvim
+    editor = atom
     excludesfile = ~/.gitignore
 [web]
     browser = start

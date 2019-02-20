@@ -18,6 +18,7 @@ powerline-status; python_version >= '3.6'
 pyhive
 pytest; python_version >= '3.6'
 pytest-cov; python_version >= '3.6'
+pyyaml
 ranger-fm; python_version >= '3.6'
 requests
 scikit-learn
