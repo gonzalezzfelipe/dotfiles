@@ -17,7 +17,7 @@ BULLETTRAIN_TIME_FG=green
 
 
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(git syntax-highlighting enhancd autojump)
+plugins=(git syntax-highlighting enhancd autojump tmux)
 
 # User configuration
 
@@ -107,6 +107,7 @@ alias rm='rm -v'
 alias sudo='sudo ' # Expand aliases when using sudo
 alias ssh='TERM=xterm-256color; ssh'
 alias ds='du -shc * | sort -rh'
+alias tm='tmux new -As felipe'
 
 # Other binaries
 if type "htop" > /dev/null 2>&1; then
