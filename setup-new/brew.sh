@@ -42,6 +42,9 @@ brew install --HEAD tmux
 brew tap caskroom/cask
 brew cask install atom
 
+# Docker
+brew install docker docker-compose
+
 # Databases
 brew install postgresql
 brew install mysql

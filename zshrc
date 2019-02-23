@@ -207,3 +207,7 @@ use() {
   fi
   source $VENV_FOLDER/$1/bin/activate
 }
+
+docker_start() {
+  open --background -a Docker
+}
