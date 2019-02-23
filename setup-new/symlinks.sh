@@ -41,7 +41,7 @@ fi
 if type "tmux" > /dev/null 2>&1; then
     rm -rf "$HOME/.tmux"
     ln -s "$dotfiles_dir/tmux" "$HOME/.tmux"
-    ln -s "$dotfiles_dir/tmux/tmux-spotify-info" "$/usr/local/bin/tmux-spotify-info"
+    ln -s "$dotfiles_dir/tmux/tmux-spotify-info" "$/usr/local/bin"
     echo Created .tmux folder symlink
 fi
 if type "pip" > /dev/null 2>&1; then
