@@ -6,8 +6,8 @@ ZSH_THEME="bullet-train"
 BULLETTRAIN_VIRTUALENV_FG=black
 BULLETTRAIN_CUSTOM_BG=blue
 
-BULLETTRAIN_GIT_BG=magenta
-BULLETTRAIN_GIT_FG=white
+BULLETTRAIN_GIT_BG=cyan
+BULLETTRAIN_GIT_FG=black
 
 BULLETTRAIN_CONTEXT_BG=white
 BULLETTRAIN_CONTEXT_FG=black
@@ -210,4 +210,10 @@ use() {
 
 docker_start() {
   open --background -a Docker
+}
+
+color_list() {
+  for i in {0..255}; do
+    printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+  done
 }

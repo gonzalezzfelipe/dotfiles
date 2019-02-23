@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Returns the current playing song in Spotify for OSX
+state=`osascript -e 'tell application "Spotify" to player state as string'`;
+
+if [ $state = "playing" ]; then
+  artist=`osascript -e 'tell application "Spotify" to artist of current track as string'`;
+  track=`osascript -e 'tell application "Spotify" to name of current track as string'`;
+
+  echo '#[fg=green,bg=colour234,nobold]#[fg=colour234,bg=green,nobold]'♫ $artist - $track'#[fg=green,bg=colour234,nobold]'
+else
+  echo ''
+fi
