@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Returns the current playing song in Spotify for OSX
 
+sleep 3  # Wait to let spotify remain closed after closing
+
 if [ $(osascript -e 'application "Spotify" is running') = "true" ]; then
 
   state=`osascript -e 'tell application "Spotify" to player state as string'`;
