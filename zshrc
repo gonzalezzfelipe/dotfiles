@@ -199,13 +199,67 @@ if type "fzf" > /dev/null 2>&1; then
     alias rd=z
 fi
 
-use() {
-  local VENV_FOLDER=${VENV_FOLDER:-~/venvs}
-  mkdir -p $VENV_FOLDER
-  if [ ! -d "$VENV_FOLDER/$1" ]; then
-    virtualenv -v $VENV_FOLDER/$1
+use () {
+  while test $# -gt 0; do
+    case "$1" in
+      -h|--help)
+        echo "This is an executable to generate a virtualenv of a name of "
+        echo "choice, that is to be made on a folder that contains all other "
+        echo "venvs."
+        echo ""
+        echo "Usage:"
+        echo ">>> use NAME [OPTIONS]"
+        echo ""
+        echo ">>> use virtualenv  # Generates a virtualenv called virtualenv"
+        echo ""
+        echo ">>> use new_venv -p python3.6  # other venv, with specific version"
+        echo ""
+        echo ">>> use new_venv --reset  # Erase and recreate"
+        echo " "
+        echo "Args:"
+        echo "NAME                      Name of the venv"
+        echo " "
+        echo "Options:"
+        echo "-h, --help                Show brief help."
+        echo "-p, --python PYTHON       Python executable to use to set up venv."
+        echo "-r, --requirements FILE   Specify requirements file to install."
+        echo "--reset                   Erases current venv and sets up a new one"
+        kill -INT $$
+        ;;
+      --reset)
+        local RESET=1
+        shift
+        ;;
+      -p|--python)
+        local PYTHON="-p $2"
+        shift
+        shift
+        ;;
+      -r|--requirements)
+        local REQUIREMENTS=$2
+        shift
+        shift
+        ;;
+      *)
+        local NAME=$1
+        shift
+        ;;
+    esac
+  done
+  local RESET=${RESET:-0}
+  local REQUIREMENTS=${REQUIREMENTS:-requirements.txt}
+  local _PATH=$HOME/.venvs/$NAME
+  if [ $RESET = 1 ]; then
+    echo "Reseting virtualenv..."
+    rm -rf "$_PATH"
   fi
-  source $VENV_FOLDER/$1/bin/activate
+  if [ ! -d "$_PATH" ]; then
+    virtualenv $_PATH $PYTHON
+  fi
+  source $_PATH/bin/activate
+  if [ ! -d "$REQUIREMENTS" ]; then
+    pip install -r $REQUIREMENTS
+  fi
 }
 
 docker_start() {
