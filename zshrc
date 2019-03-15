@@ -138,67 +138,6 @@ else
     alias tm='tmux -f "$HOME/.tmux/tmux.conf" new -A -s fgon'
 fi
 
-# }}}
-# Fzf {{{
-
-if type "fzf" > /dev/null 2>&1; then
-    # Enable completion and key bindings
-    [[ $- == *i* ]] && . "$brew_dir/opt/fzf/shell/completion.bash" 2> /dev/null
-    . "$brew_dir/opt/fzf/shell/key-bindings.bash"
-
-    # Change default options (show 15 lines, use top-down layout)
-    export FZF_DEFAULT_OPTS='--height 15 --reverse '\
-'--bind=ctrl-space:toggle+down'
-    # Use ag for files and fd for dirs
-    export FZF_DEFAULT_COMMAND='ag -g ""'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
-    if type "tree" > /dev/null 2>&1; then
-        export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-    fi
-    # Disable tmux integration (use ncurses directly)
-    export FZF_TMUX='0'
-
-    # Alt-p mapping to cd to selected parent directory (sister to Alt-c)
-    __fzf_cd_parent__() {
-        local declare dirs=()
-        get_parent_dirs() {
-            if [[ -d "${1}" ]]; then dirs+=("$1"); else return; fi
-            if [[ "${1}" == '/' ]]; then
-                for _dir in "${dirs[@]}"; do echo $_dir; done
-            else
-                get_parent_dirs $(dirname "$1")
-            fi
-    }
-        local start_dir="$(dirname "$PWD")"  # start with parent dir
-        local DIR=$(get_parent_dirs $(realpath "${1:-$start_dir}") | \
-            fzf --preview 'tree -C -d -L 2 {} | head -200')
-        if [[ ! -z $DIR ]]; then
-            printf 'cd %q' "$DIR"
-        else
-            return 1
-        fi
-    }
-
-    # Bookmarks (requires https://github.com/urbainvaes/fzf-marks)
-    if [ -f "$brew_dir/opt/fzf/shell/fzf-marks.plugin.bash" ]; then
-        . "$brew_dir/opt/fzf/shell/fzf-marks.plugin.bash"
-        alias bm='fzm'
-    fi
-
-    # Z
-    if [ -f "$brew_dir/etc/profile.d/z.sh" ]; then
-        . /usr/local/etc/profile.d/z.sh
-    fi
-    unalias z 2> /dev/null
-    z() {
-        [ $# -gt 0 ] && _z "$*" && return
-        cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse \
-        --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
-    }
-    alias rd=z
-fi
-
 use () {
   while test $# -gt 0; do
     case "$1" in
