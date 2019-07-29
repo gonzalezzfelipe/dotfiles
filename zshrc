@@ -242,7 +242,6 @@ export CPPFLAGS="-I/usr/local/opt/openssl/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
 export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/3.6/bin
 export PATH=$PATH:/Users/felipe/Library/Python/3.6/bin
-export GIT_TOKEN="797218e2463b5f1caae7dc0227ce047f96a102f3"
 
 copy_git_token() {
   echo $GIT_TOKEN | pbcopy
