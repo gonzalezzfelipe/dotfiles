@@ -21,7 +21,7 @@ BULLETTRAIN_TIME_FG=green
 
 
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(git syntax-highlighting enhancd autojump tmux)
+plugins=(git autojump tmux osx colorize)
 
 # User configuration
 
@@ -111,7 +111,28 @@ alias rm='rm -v'
 alias sudo='sudo ' # Expand aliases when using sudo
 alias ssh='TERM=xterm-256color; ssh'
 alias ds='du -shc * | sort -rh'
-alias tm='tmux new -As felipe'
+alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias pcli='ssh fgonzalez@prd-amber-pivot.jampp.com -t '\
+'tmux new -A -s fgonzalez '\
+'"presto-cli\ --server\ emr-prd-data.jampp.com:8889\ --catalog\ hive\ '\
+'--schema\ aleph\ --user\ fgonzalez"'
+alias hcli="ssh fgonzalez@prd-amber-pivot.jampp.com -t "\
+"tmux new -A -s fgonzalez "\
+"'beeline\ -u\ \"jdbc:hive2://emr-prd-etl.jampp.com:10000/default\;auth=noSasl\"\ -n\ hadoop'"
+
+# Git
+alias gs='git status'
+alias ga='git add'
+alias gd='git diff'
+alias gc='git commit --m'
+alias gp='git push'
+alias gpull='git pull'
+alias gl='git log'
+alias gb='git checkout -b'
+
+# Postgres
+alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
 # Other binaries
 if type "htop" > /dev/null 2>&1; then
@@ -128,10 +149,10 @@ if [[ "$OSTYPE" == 'darwin'* ]]; then
 
     # Start Tmux attaching to an existing session named fgon or creating one
     # with such name (we also indicate the tmux.conf file location)
-    alias tm='tmux -f "$HOME/.tmux/tmux.conf" new -A -s fgon'
+    alias tm='tmux -f "$HOME/.tmux/tmux.conf" new -A -s'
 
     # SSH and Tmux: connect to emr via ssh and then start tmux creating a new
-    # session called pedrof or attaching to an existing one with that name.
+    # session called fgonzalez or attaching to an existing one with that name.
     # Presto client
 else
     # Differentiate and use colors for directories, symbolic links, etc.
@@ -174,7 +195,7 @@ use () {
         shift
         ;;
       -p|--python)
-        local PYTHON="-p $2"
+        local PYTHON="--python=$2"
         shift
         shift
         ;;
@@ -200,7 +221,7 @@ use () {
     virtualenv $_PATH $PYTHON
   fi
   source $_PATH/bin/activate
-  if [ ! -d "$REQUIREMENTS" ]; then
+  if [ -f "$REQUIREMENTS" ]; then
     pip install -r $REQUIREMENTS
   fi
 }
@@ -213,4 +234,89 @@ color_list() {
   for i in {0..255}; do
     printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
   done
+}
+
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
+export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/3.6/bin
+export PATH=$PATH:/Users/felipe/Library/Python/3.6/bin
+export GIT_TOKEN="797218e2463b5f1caae7dc0227ce047f96a102f3"
+
+copy_git_token() {
+  echo $GIT_TOKEN | pbcopy
+}
+
+
+add_ssh_host() {
+  while test $# -gt 0; do
+    case "$1" in
+      --help)
+        echo "Add a host to ~/.ssh/config."
+        echo ""
+        echo "Options:"
+        echo "--help                    Show this help."
+        echo "-h, --host HOST           Name to define host."
+        echo "-u, --user USER           User to connect to host."
+        echo "-i, --ip IPADRESS         IP Adress of host."
+        echo "--interactive             Enable prompt to define this values."
+        echo ""
+        echo "Usage:"
+        echo "$ add_ssh_host -h NAME -u USER -i IP"
+        echo " "
+        kill -INT $$
+        ;;
+      -h|--host)
+        local _HOST=$2
+        shift
+        shift
+        ;;
+      -u|--user)
+        local _USER=$2
+        shift
+        shift
+        ;;
+      -i|--ip)
+        local _IP=$2
+        shift
+        shift
+        ;;
+      --interactive)
+        local INTERACTIVE=1
+        shift
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+  local INTERACTIVE=${INTERACTIVE:-0}
+  if [[ $INTERACTIVE == 1 ]]; then
+    echo 'Host: '
+    read _HOST
+    echo 'User: '
+    read _USER
+    echo 'IP Adress: '
+    read _IP
+  fi
+  if [ -z $_HOST ]; then
+    echo "Error: Host must be defined."
+    kill -INT $$
+  fi
+  if [ -z $_USER ]; then
+    echo "Error: User must be defined."
+    kill -INT $$
+  fi
+  if [ -z $_IP ]; then
+    echo "Error: IP Adress must be defined."
+    kill -INT $$
+  fi
+  echo "" >> ~/.ssh/config
+  echo "Host "$_HOST  >> ~/.ssh/config
+  echo "  User "$_USER >> ~/.ssh/config
+  echo "  Hostname "$_IP >> ~/.ssh/config
+  echo "  ServerAliveInterval 30" >> ~/.ssh/config
+  echo "  ServerAliveCountMax 120" >> ~/.ssh/config
+  echo "SSH Host added succesfully!"
 }

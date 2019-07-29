@@ -36,6 +36,8 @@
   'ctrl-a ctrl-w': 'move-panes:move-up'
   'ctrl-a ctrl-s': 'move-panes:move-down'
   'alt-f': 'jumpy:toggle'
+  'alt-up': 'line-jumper:move-up'
+  'alt-down': 'line-jumper:move-down'
 
 '.tree-view':
     'shift-enter': 'unset!'

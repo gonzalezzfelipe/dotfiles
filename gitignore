@@ -35,3 +35,16 @@ Icon?
 *.nav
 *.snm
 *.vrb
+
+# Pypi
+
+*/build
+*/dist
+
+# Testing
+temp/
+temp*
+
+
+# Docs
+_build
