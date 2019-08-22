@@ -128,7 +128,8 @@ alias gc='git commit --m'
 alias gp='git push'
 alias gpull='git pull'
 alias gl='git log'
-alias gb='git checkout -b'
+alias gb='git branch'
+alias gch='git checkout'
 
 # Postgres
 alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
