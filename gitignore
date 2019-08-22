@@ -43,7 +43,7 @@ Icon?
 
 # Testing
 temp/
-temp*
+temp.*
 
 
 # Docs
