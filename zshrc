@@ -113,11 +113,11 @@ alias ssh='TERM=xterm-256color; ssh'
 alias ds='du -shc * | sort -rh'
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias pcli='ssh fgonzalez@prd-amber-pivot.jampp.com -t '\
-'tmux new -A -s fgonzalez '\
+'tmux new -A -s fgonzalez-presto '\
 '"presto-cli\ --server\ emr-prd-data.jampp.com:8889\ --catalog\ hive\ '\
 '--schema\ aleph\ --user\ fgonzalez"'
 alias hcli="ssh fgonzalez@prd-amber-pivot.jampp.com -t "\
-"tmux new -A -s fgonzalez "\
+"tmux new -A -s fgonzalez-hive "\
 "'beeline\ -u\ \"jdbc:hive2://emr-prd-etl.jampp.com:10000/default\;auth=noSasl\"\ -n\ hadoop'"
 
 # Git
@@ -148,10 +148,6 @@ if [[ "$OSTYPE" == 'darwin'* ]]; then
     # Differentiate and use colors for directories, symbolic links, etc.
     cd() { builtin cd "$@" && ls -GF; }
 
-    # Start Tmux attaching to an existing session named fgon or creating one
-    # with such name (we also indicate the tmux.conf file location)
-    alias tm='tmux -f "$HOME/.tmux/tmux.conf" new -A -s'
-
     # SSH and Tmux: connect to emr via ssh and then start tmux creating a new
     # session called fgonzalez or attaching to an existing one with that name.
     # Presto client
@@ -160,8 +156,6 @@ else
     alias ls='ls -F --color=auto'
     # Change directory and list files
     cd() { builtin cd "$@" && ls -F --color=auto; }
-    # Open tmux loading config file
-    alias tm='tmux -f "$HOME/.tmux/tmux.conf" new -A -s fgon'
 fi
 
 use () {
@@ -320,3 +314,43 @@ add_ssh_host() {
   echo "  ServerAliveCountMax 120" >> ~/.ssh/config
   echo "SSH Host added succesfully!"
 }
+
+tm () {
+  while test $# -gt 0; do
+    case "$1" in
+      -h|--help)
+        echo "This is an executable to open a new tmux window with previously configured panes and "
+        echo "windows, using the custom configuration."
+        echo ""
+        echo "Usage:"
+        echo ">>> tm NAME"
+        echo ""
+        echo "If the defined NAME is a configuration on the ~/.teamocil folder, then that will be"
+        echo "used. Else, a new TMUX session will be created with default initialization."
+        echo ""
+        echo "Args:"
+        echo "NAME                      Name of the configuration to load."
+        echo ""
+        echo "Options:"
+        echo "-h, --help                Show brief help."
+        kill -INT $$
+        ;;
+      *)
+        local NAME=$1
+        shift
+        ;;
+    esac
+  done
+
+  local FILE=~/.teamocil/$NAME.yml
+  if [ -f "$FILE" ]; then
+    tmux -f "$HOME/.tmux/tmux.conf" new-session -d "teamocil $NAME"\; attach
+  else
+    tmux -f "$HOME/.tmux/tmux.conf" new -A -s $NAME
+  fi
+}
+
+compctl -g '~/.teamocil/*(:t:r)' teamocil
+compctl -g '~/.teamocil/*(:t:r)' tm
+
+export GIT_TOKEN=

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 brew_dir=$(brew --prefix)
 
+gem install teamocil
+
 # Install fzf plugins
 if type "fzf" > /dev/null 2>&1; then
     git clone https://github.com/urbainvaes/fzf-marks.git

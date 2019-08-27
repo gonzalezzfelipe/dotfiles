@@ -1,0 +1,12 @@
+name: facultad
+
+windows:
+  - name: home
+    layout: main-horizontal
+    panes:
+      - zsh
+
+  - name: jupyter
+    layout: main-horizontal
+    panes:
+      - jupyter notebook

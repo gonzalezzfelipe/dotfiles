@@ -1,0 +1,49 @@
+name: laburo
+
+windows:
+  - name: comodin-ssh
+    layout: main-horizontal
+
+  - name: analytics
+    layout: main-horizontal
+    root: ~/git-repos/analytics
+    panes:
+      - git status
+
+  - name: autopivot
+    layout: main-horizontal
+    root: ~/git-repos/ops-analytics
+    panes:
+      - git status
+
+  - name: ragnar
+    layout: main-horizontal
+    root: ~/git-repos/ragnar
+    panes:
+      - git status
+
+  - name: stardust
+    layout: 898b,204x55,0,0[204x42,0,0,36,204x12,0,43,37]
+    root: ~/git-repos/stardust
+    panes:
+      - git status
+      - commands:
+        - use stardust
+        - clear
+        - ipython
+
+  - name: datacommon
+    layout: main-horizontal
+    root: ~/git-repos/data-common
+    panes:
+      - git status
+
+  - name: pcli
+    layout: main-horizontal
+    panes:
+      - pcli
+
+  - name: explore
+    layout: main-horizontal
+    panes:
+      - ipython
