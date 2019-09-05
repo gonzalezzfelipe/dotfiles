@@ -350,7 +350,10 @@ tm () {
   fi
 }
 
+# Custom autocompletes
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 compctl -g '~/.teamocil/*(:t:r)' tm
+compctl -g '~/.venvs/*(:t:r)' use
 
+# Add git token for commodity (never commit it)
 export GIT_TOKEN=
