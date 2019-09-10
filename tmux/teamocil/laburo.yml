@@ -25,6 +25,7 @@ windows:
   - name: stardust
     layout: 898b,204x55,0,0[204x42,0,0,36,204x12,0,43,37]
     root: ~/git-repos/stardust
+    focus: true
     panes:
       - git status
       - commands:
