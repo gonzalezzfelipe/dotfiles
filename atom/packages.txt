@@ -1,10 +1,16 @@
 atom-file-icons
 atom-html-preview
+atom-jinja2
 autocomplete-python
 docblock-python
 git-plus
 gruvbox-plus-syntax
+language-fortran
 language-generic-config
+language-latex
+language-restructuredtext
+language-viml
+latex-autocomplete
 line-jumper
 linter
 linter-pycodestyle
@@ -15,6 +21,7 @@ multi-wrap-guide
 nerd-treeview
 pane-split-moves-tab
 paner
+pdf-view
 pretty-json
 python-yapf
 string-theory

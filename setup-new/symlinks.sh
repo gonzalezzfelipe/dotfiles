@@ -33,6 +33,12 @@ if type "zsh" > /dev/null 2>&1; then
 fi
 . "$HOME/.zshrc"
 
+if type "vim" > /dev/null 2>&1; then
+    rm -rf "$HOME/.vimrc"
+    ln -s "$dotfiles_dir/vimrc" "$HOME/.vimrc"
+    echo Created .vimrc symlink
+fi
+
 if type "ctags" > /dev/null 2>&1; then
     rm -rf "$HOME/.ctags"
     ln -s "$dotfiles_dir/ctags" "$HOME/.ctags"
