@@ -222,6 +222,10 @@
   'line_break':
     'prefix': 'line_break'
     'body': '########################################################################'
+  'basic_imports':
+    'prefix': 'basic'
+    'body':'import datetime as dt\nimport os\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd'
+
 '.source.sql':
   'fault_events':
     'prefix': 'fault_events'

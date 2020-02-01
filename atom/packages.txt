@@ -2,7 +2,7 @@ atom-file-icons
 atom-html-preview
 atom-jinja2
 autocomplete-python
-docblock-python
+gonzalezzfelipe/docblock-python
 git-plus
 gruvbox-plus-syntax
 language-fortran

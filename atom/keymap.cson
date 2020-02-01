@@ -38,6 +38,13 @@
   'alt-f': 'jumpy:toggle'
   'alt-up': 'line-jumper:move-up'
   'alt-down': 'line-jumper:move-down'
+  'ctrl-alt-d': 'docblock-python:generate_docblock'
+  'ctrl-alt-b': 'python-black:format'
+  'cmd-b': 'unset!'
+  'cmd-b a': 'bookmarks:toggle-bookmark'
+  'cmd-b c': 'bookmarks:clear-bookmarks'
+  'cmd-b down': 'bookmarks:jump-to-next-bookmark'
+  'cmd-b up': 'bookmarks:jump-to-previous-bookmark'
 
 '.tree-view':
     'shift-enter': 'unset!'
