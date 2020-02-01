@@ -19,6 +19,13 @@ BULLETTRAIN_CONTEXT_FG=black
 BULLETTRAIN_TIME_BG=black
 BULLETTRAIN_TIME_FG=green
 
+BULLETTRAIN_PROMPT_ORDER=(
+  time
+  context
+  dir
+  virtualenv
+  git
+)
 
 HIST_STAMPS="yyyy-mm-dd"
 plugins=(git autojump tmux osx colorize)
@@ -199,6 +206,10 @@ use () {
         shift
         shift
         ;;
+      -d|--delete)
+        local DELETE=1
+        shift
+        ;;
       *)
         local NAME=$1
         shift
@@ -206,8 +217,20 @@ use () {
     esac
   done
   local RESET=${RESET:-0}
+  local DELETE=${DELETE:-0}
   local REQUIREMENTS=${REQUIREMENTS:-requirements.txt}
+
+  if [[ $NAME = "." ]]; then
+    NAME="${PWD##*/}"  # If . then use local dir name
+  fi
+
   local _PATH=$HOME/.venvs/$NAME
+  if [ $DELETE = 1 ]; then
+    echo "Deleting virtualenv..."
+    echo $_PATH
+    rm -rf "$_PATH"
+    return
+  fi
   if [ $RESET = 1 ]; then
     echo "Reseting virtualenv..."
     rm -rf "$_PATH"
@@ -354,6 +377,15 @@ tm () {
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 compctl -g '~/.teamocil/*(:t:r)' tm
 compctl -g '~/.venvs/*(:t:r)' use
+compctl -k "(--help --host --user --ip)" add_ssh_host
 
 # Add git token for commodity (never commit it)
 export GIT_TOKEN=
+
+# Support for Spark (java8)
+export PATH=/usr/local/adoptopenjdk/jdk8u222-b10/Contents/Home/bin:$PATH
+
+# GO path
+export GOPATH="${HOME}/.go"
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
