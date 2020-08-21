@@ -366,8 +366,15 @@ tm () {
   done
 
   local FILE=~/.teamocil/$NAME.yml
+
+  # If a session exists with that name, then attach to it
+  if tmux ls | grep -q -E '^'$NAME':\s+.*'; then
+    tmux attach -t $NAME
+    return
+  fi
+
   if [ -f "$FILE" ]; then
-    tmux -f "$HOME/.tmux/tmux.conf" new-session -d "teamocil $NAME"\; attach
+    tmux -f "$HOME/.tmux/tmux.conf" new-session "teamocil $NAME"\; attach
   else
     tmux -f "$HOME/.tmux/tmux.conf" new -A -s $NAME
   fi
@@ -389,3 +396,6 @@ export PATH=/usr/local/adoptopenjdk/jdk8u222-b10/Contents/Home/bin:$PATH
 export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+# Multithreading issues
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES

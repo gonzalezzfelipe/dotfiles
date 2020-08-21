@@ -10,9 +10,9 @@ if [ $(osascript -e 'application "Spotify" is running') = "true" ]; then
   track=`osascript -e 'tell application "Spotify" to name of current track as string'`;
 
   if [ $state = "playing" ]; then
-    echo '#[fg='#1db954',bg=colour234,nobold]#[fg=colour234,bg='#1db954',nobold]'♫ $artist - $track'#[fg='#1db954',bg=colour234,nobold]'
+    echo '#[fg=#1db954,bg=default,bold,blink] ♫ '$artist - $track' '
   elif [ $state = "paused" ]; then
-    echo '#[fg='#1db954',bg=colour234,nobold]#[fg=colour234,bg='#1db954',nobold]'❚❚ $artist - $track'#[fg='#1db954',bg=colour234,nobold]'
+    echo '#[fg=#1db954,bg=default,bold] ❚❚ '$artist - $track' '
   else
     echo ''
   fi
