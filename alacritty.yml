@@ -1,0 +1,335 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty it self.
+env:
+  # TERM env customization.
+  #
+  # If this property is not set, alacritty will set it to xterm-256color.
+  #
+  # Note that some xterm terminfo databases don't declare support for italics.
+  # You can verify this by checking for the presence of `smso` and `sitm` in
+  # `infocmp xterm-256color`.
+  TERM: xterm-256color
+
+window:
+  decorations: full
+  startup_mode: Fullscreen
+
+# Font configuration (changes require restart)
+font:
+  # The normal (roman) font face to use.
+  # Style can be specified to pick a specific face.
+  normal:
+    # family: "Roboto Mono for Powerline"
+    family: "SauceCodePro Nerd Font"
+    # family: "Ubuntu Mono derivative Powerline"
+    # family: "Source Code Pro"
+
+  # The bold font face
+  bold:
+    # family: "Roboto Mono for Powerline"
+    family: "SauceCodePro Nerd Font"
+    # family: "Ubuntu Mono derivative Powerline"
+    # family: "Source Code Pro"
+
+  # The italic font face
+  italic:
+    # family: "Roboto Mono for Powerline"
+    family: "SauceCodePro Nerd Font"
+    # family: "Ubuntu Mono derivative Powerline"
+    # family: "Source Code Pro"
+    style: "Medium Italic"
+
+  # Point size of the font
+  size: 13.0
+
+  # Offset is the extra space around each character. offset.y can be thought of
+  # as modifying the linespacing, and offset.x as modifying the letter spacing.
+  offset:
+    x: 0
+    y: 0
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increase the x offset to move the glyph to
+  # the right, increase the y offset to move the glyph upward.
+  glyph_offset:
+    x: 0
+    y: 0
+
+  # Thin stroke font rendering (macOS only)
+  #
+  # Thin strokes are suitable for retina displays, but for non-retina you
+  # probably want this set to false.
+  #
+  # macOS >= 10.14.x:
+  #
+  # If the font quality on non-retina display looks bad then set
+  # `use_thin_strokes` to `true` and enable font smoothing by running the
+  # following command:
+  #   `defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`
+  #
+  # This is a global setting and will require a log out or restart to take
+  # effect.
+  use_thin_strokes: true
+
+# When true, bold text is drawn using the bright variant of colors.
+draw_bold_text_with_bright_colors: false
+
+# Use custom cursor colors. If true, display the cursor in the cursor.foreground
+# and cursor.background colors, otherwise invert the colors of the cursor.
+# custom_cursor_colors: false
+
+bell:
+  animation: EaseOutExpo
+  color: '0xffffff'
+  duration: 0
+
+# Background opacity
+background_opacity: 1.0
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: false
+
+cursor:
+  # Cursor style
+  #
+  # Values for 'style':
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
+
+debug:
+  # Should display the render timer
+  render_timer: false
+
+  # Keep the log file after quitting Alacritty.
+  persistent_logging: false
+
+  # Log level
+  #
+  # Values for `log_level`:
+  #   - None
+  #   - Error
+  #   - Warn
+  #   - Info
+  #   - Debug
+  #   - Trace
+  log_level: None
+
+  # Print all received window events.
+  print_events: false
+
+  # Record all characters and escape sequences as test data.
+  ref_test: false
+
+# Colors (Gruvbox light)
+schemes:
+  gruvbox_light: &gruvbox_light
+    # Default colors
+    primary:
+      # hard contrast: background = '#f9f5d7'
+      background: '#fbf1c7'
+      # soft contrast: background = '#f2e5bc'
+      foreground: '#3c3836'
+
+    # Normal colors
+    normal:
+      black:   '#fbf1c7'
+      red:     '#cc241d'
+      green:   '#98971a'
+      yellow:  '#d79921'
+      blue:    '#458588'
+      magenta: '#b16286'
+      cyan:    '#689d6a'
+      white:   '#7c6f64'
+
+    # Bright colors
+    bright:
+      black:   '#928374'
+      red:     '#9d0006'
+      green:   '#79740e'
+      yellow:  '#b57614'
+      blue:    '#076678'
+      magenta: '#8f3f71'
+      cyan:    '#427b58'
+      white:   '#3c3836'
+  gruvbox_dark: &gruvbox_dark
+    # Default colors
+    primary:
+      # hard contrast: background = '#1d2021'
+      background: '#282828'
+      # soft contrast: background = '#32302f'
+      foreground: '#ebdbb2'
+
+    # Normal colors
+    normal:
+      black:   '#282828'
+      red:     '#cc241d'
+      green:   '#98971a'
+      yellow:  '#d79921'
+      blue:    '#458588'
+      magenta: '#b16286'
+      cyan:    '#689d6a'
+      white:   '#a89984'
+
+    # Bright colors
+    bright:
+      black:   '#928374'
+      red:     '#fb4934'
+      green:   '#b8bb26'
+      yellow:  '#fabd2f'
+      blue:    '#83a598'
+      magenta: '#d3869b'
+      cyan:    '#8ec07c'
+      white:   '#ebdbb2'
+  iceberg_dark: &iceberg_dark
+    # Default colors
+    primary:
+      background: '#161821'
+      foreground: '#d2d4de'
+
+    # Normal colors
+    normal:
+      black:   '#161821'
+      red:     '#e27878'
+      green:   '#b4be82'
+      yellow:  '#e2a478'
+      blue:    '#84a0c6'
+      magenta: '#a093c7'
+      cyan:    '#89b8c2'
+      white:   '#c6c8d1'
+
+    # Bright colors
+    bright:
+      black:   '#6b7089'
+      red:     '#e98989'
+      green:   '#c0ca8e'
+      yellow:  '#e9b189'
+      blue:    '#91acd1'
+      magenta: '#ada0d3'
+      cyan:    '#95c4ce'
+      white:   '#d2d4de'
+  iceberg_light: &iceberg_light
+    # Default colors
+    primary:
+      background: '0xe8e9ec'
+      foreground: '0x33374c'
+
+    # Normal colors
+    normal:
+      black:   '0xdcdfe7'
+      red:     '0xcc517a'
+      green:   '0x668e3d'
+      yellow:  '0xc57339'
+      blue:    '0x2d539e'
+      magenta: '0x7759b4'
+      cyan:    '0x3f83a6'
+      white:   '0x33374c'
+
+    # Bright colors
+    bright:
+      black:   '0x8389a3'
+      red:     '0xcc3768'
+      green:   '0x598030'
+      yellow:  '0xb6662d'
+      blue:    '0x22478e'
+      magenta: '0x6845ad'
+      cyan:    '0x327698'
+      white:   '0x262a3f'
+  monokai: &monokai
+    # Default colors
+    primary:
+      background: '#272822'
+      foreground: '#F8F8F2'
+
+    # Normal colors
+    normal:
+     black:   '#272822'
+     red:     '#F92672'
+     green:   '#A6E22E'
+     yellow:  '#F4BF75'
+     blue:    '#66D9EF'
+     magenta: '#AE81FF'
+     cyan:    '#A1EFE4'
+     white:   '#F8F8F2'
+
+    # Bright colors
+    bright:
+     black:   '#75715E'
+     red:     '#F92672'
+     green:   '#A6E22E'
+     yellow:  '#F4BF75'
+     blue:    '#66D9EF'
+     magenta: '#AE81FF'
+     cyan:    '#A1EFE4'
+     white:   '#F9F8F5'
+  material: &material
+    # Default colors
+    primary:
+      background: '#263238'
+      foreground: '#eeffff'
+
+    # Normal colors
+    normal:
+      black:   '#000000'  # Arbitrary
+      red:     '#e53935'
+      green:   '#91b859'
+      yellow:  '#ffb62c'
+      blue:    '#6182b8'
+      magenta: '#ff5370'  # Dark pink of the original material theme
+      cyan:    '#39adb5'
+      white:   '#a0a0a0'  # Arbitrary
+
+    # Bright colors
+    bright:
+      black:   '#4e4e4e'  # Arbitrary
+      red:     '#ff5370'
+      green:   '#c3e88d'
+      yellow:  '#ffcb6b'
+      blue:    '#82aaff'
+      magenta: '#f07178'  # Pink of the original material theme
+      cyan:    '#89ddff'
+      white:   '#ffffff'  # Arbitrary
+  oceanic_next: &oceanic_next
+    # Default colors
+    primary:
+      background: '#1b2b34'
+      foreground: '#d8dee9'
+
+    # Colors the cursor will use if `custom_cursor_colors` is true
+    cursor:
+      text: '#1b2b34'
+      cursor: '#ffffff'
+
+    # Normal colors
+    normal:
+      black:   '#343d46'
+      red:     '#EC5f67'
+      green:   '#99C794'
+      yellow:  '#FAC863'
+      blue:    '#6699cc'
+      magenta: '#c594c5'
+      cyan:    '#5fb3b3'
+      white:   '#d8dee9'
+
+    # Bright colors
+    bright:
+      black:   '#343d46'
+      red:     '#EC5f67'
+      green:   '#99C794'
+      yellow:  '#FAC863'
+      blue:    '#6699cc'
+      magenta: '#c594c5'
+      cyan:    '#5fb3b3'
+      white:   '#d8dee9'
+colors: *oceanic_next
