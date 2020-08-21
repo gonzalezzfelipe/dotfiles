@@ -23,12 +23,14 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'preservim/nerdcommenter'
 
 " Colorschemes
 Plugin 'morhetz/gruvbox'
 Plugin 'whatyouhide/vim-gotham'
 Bundle 'chase/focuspoint-vim'
 Plugin 'kaicataldo/material.vim'
+Plugin 'mhartington/oceanic-next'
 " ..."
 
 " All of your Plugins must be added before the following line
@@ -36,8 +38,17 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " Colorschemes
-let g:lightline = {'colorscheme': 'wombat'}
-colorscheme focuspoint
+syntax enable
+
+set term=xterm-256color
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+let g:lightline = {'colorscheme': 'OceanicNext'}
+colorscheme Material
+
+let g:NERDSpaceDelims = 1
 
 " Enable folding
 set foldmethod=indent
@@ -98,14 +109,10 @@ nnoremap <S-Right> <C-W>>
 " Create and destroy panes
 nnoremap S :w<enter>
 nnoremap s :split<enter>
-nnoremap v :vsplit<enter>
+nnoremap V :vsplit<enter>
 nnoremap x :q<enter>
 nnoremap X :q!<enter>
-" moving
-nnoremap u 10k
-nnoremap d 10j
 " Undo and redo
 nnoremap <S-h> u
 nnoremap <S-L> <C-R>
-nnoremap <C-d> dd
 nnoremap <C-s> :w<enter>
