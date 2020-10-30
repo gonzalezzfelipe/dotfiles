@@ -1,5 +1,6 @@
 set nocompatible              " required
 filetype off                  " required
+set relativenumber
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -13,9 +14,18 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
-" Bundle 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
+Plugin 'davidhalter/jedi-vim'
+
+if has('nvim')
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+
+Plugin 'dense-analysis/ale'
+" Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
@@ -24,6 +34,13 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'preservim/nerdcommenter'
+Plugin 'ervandew/supertab'
+Plugin 'mileszs/ack.vim'
+Plugin 'ambv/black'
+Plugin 'junegunn/goyo.vim'
+Plugin 'cespare/vim-toml'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 " Colorschemes
 Plugin 'morhetz/gruvbox'
@@ -37,7 +54,11 @@ Plugin 'mhartington/oceanic-next'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" Colorschemes
+let g:deoplete#enable_at_startup = 1
+let g:jedi#completions_enabled = 1
+autocmd FileType python setlocal completeopt-=preview
+
+"" Colorschemes
 syntax enable
 
 set term=xterm-256color
@@ -45,16 +66,40 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let g:lightline = {'colorscheme': 'OceanicNext'}
-colorscheme Material
+let g:lightline = {
+    \ 'colorscheme': 'materia',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead'
+    \ },
+  \ }
+colorscheme gruvbox
 
-let g:NERDSpaceDelims = 1
+" Spaces
+let g:NERDSpaceDelims = 0
+autocmd BufWritePre * %s/\s\+$//e
+
+" Tmux
+au FocusGained,BufEnter * :checktime
 
 " Enable folding
 set foldmethod=indent
-set foldlevel=99
+set foldlevel=2
 
 nnoremap <space> za
+
+set nowrap
+
+" Tabs and Spaces
+set expandtab
+set ts=4
+autocmd FileType make setlocal noexpandtab  " Dont expand on makefiles
+autocmd FileType sql setlocal ts=2
+autocmd FileType json setlocal ts=2
+autocmd FileType html setlocal ts=2
 
 " PEP8
 set encoding=utf-8
@@ -62,7 +107,7 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=79 |
+    \ set textwidth=88 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
@@ -90,12 +135,17 @@ set splitright
 set updatetime=250
 
 " Wrap guides
-set colorcolumn=80,100
-set colorcolumn=100
+autocmd FileType python,sql setlocal colorcolumn=88
+autocmd FileType tex setlocal colorcolumn=100
 highlight ColorColumn guibg=red
+
+set textwidth=0 wrapmargin=0
+autocmd FileType tex setlocal textwidth=100
 
 " Keybindings
 
+" Tabs
+nnoremap t :tabnew<enter>
 " move between panes
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -116,3 +166,8 @@ nnoremap X :q!<enter>
 nnoremap <S-h> u
 nnoremap <S-L> <C-R>
 nnoremap <C-s> :w<enter>
+
+" Remove completion for SQL files
+let g:omni_sql_no_default_maps = 1
+let g:ftplugin_sql_omni_key = '<Leader>sql'
+let g:ftplugin_sql_omni_key = '<Plug>DisableSqlOmni'

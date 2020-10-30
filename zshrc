@@ -236,11 +236,11 @@ use () {
     rm -rf "$_PATH"
   fi
   if [ ! -d "$_PATH" ]; then
-    virtualenv $_PATH $PYTHON
+    virtualenv --system-site-packages $_PATH $PYTHON
   fi
   source $_PATH/bin/activate
   if [ -f "$REQUIREMENTS" ]; then
-    pip install -r $REQUIREMENTS
+    pip install -I -r $REQUIREMENTS
   fi
 }
 
