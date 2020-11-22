@@ -43,6 +43,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 " Colorschemes
+" Plugin 'chriskempson/base16-vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'whatyouhide/vim-gotham'
 Bundle 'chase/focuspoint-vim'
@@ -66,17 +67,15 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let g:lightline = {
-    \ 'colorscheme': 'materia',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'FugitiveHead'
-    \ },
-  \ }
-colorscheme gruvbox
+ let g:lightline = {
+     \ 'active': {
+     \   'left': [ [ 'mode', 'paste' ],
+     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+     \ },
+     \ 'component_function': {
+     \   'gitbranch': 'FugitiveHead'
+     \ },
+   \ }
 
 " Spaces
 let g:NERDSpaceDelims = 0
@@ -135,8 +134,8 @@ set splitright
 set updatetime=250
 
 " Wrap guides
-autocmd FileType python,sql setlocal colorcolumn=88
-autocmd FileType tex setlocal colorcolumn=100
+autocmd FileType python,sql setlocal colorcolumn=89
+autocmd FileType tex setlocal colorcolumn=101
 highlight ColorColumn guibg=red
 
 set textwidth=0 wrapmargin=0
@@ -163,11 +162,20 @@ nnoremap V :vsplit<enter>
 nnoremap x :q<enter>
 nnoremap X :q!<enter>
 " Undo and redo
-nnoremap <S-h> u
-nnoremap <S-L> <C-R>
+nnoremap <S-u> <C-R>
 nnoremap <C-s> :w<enter>
 
 " Remove completion for SQL files
 let g:omni_sql_no_default_maps = 1
 let g:ftplugin_sql_omni_key = '<Leader>sql'
 let g:ftplugin_sql_omni_key = '<Plug>DisableSqlOmni'
+
+" Delete, not cut
+nnoremap d "_d
+vnoremap d "_d
+vnoremap p "_dP
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256          " Remove this line if not necessary
+  source ~/.vimrc_background
+endif
