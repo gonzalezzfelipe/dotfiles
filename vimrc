@@ -12,7 +12,6 @@ Plugin 'gmarik/Vundle.vim'
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
 
-Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'davidhalter/jedi-vim'
 
@@ -25,7 +24,6 @@ else
 endif
 
 Plugin 'dense-analysis/ale'
-" Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
@@ -41,15 +39,11 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'cespare/vim-toml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plugin 'heavenshell/vim-pydocstring', { 'do': 'make install' }
+Plugin 'pseewald/vim-anyfold'
 
-" Colorschemes
-" Plugin 'chriskempson/base16-vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'whatyouhide/vim-gotham'
-Bundle 'chase/focuspoint-vim'
-Plugin 'kaicataldo/material.vim'
-Plugin 'mhartington/oceanic-next'
-" ..."
+" Colorschemes ==> Compatible with chromance
+Plugin 'chriskempson/base16-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -77,16 +71,25 @@ endif
      \ },
    \ }
 
+" Chromance
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
 " Spaces
 let g:NERDSpaceDelims = 0
 autocmd BufWritePre * %s/\s\+$//e
+set backspace=indent,eol,start
 
 " Tmux
 au FocusGained,BufEnter * :checktime
 
-" Enable folding
-set foldmethod=indent
-set foldlevel=2
+" Enable folding, as stated on https://github.com/pseewald/vim-anyfold
+filetype plugin indent on
+syntax on
+autocmd Filetype * AnyFoldActivate
+set foldlevel=99 " Open all folds
 
 nnoremap <space> za
 
@@ -94,13 +97,10 @@ set nowrap
 
 " Tabs and Spaces
 set expandtab
-set ts=4
+set ts=2
 autocmd FileType make setlocal noexpandtab  " Dont expand on makefiles
-autocmd FileType sql setlocal ts=2
-autocmd FileType json setlocal ts=2
-autocmd FileType html setlocal ts=2
+autocmd FileType python setlocal ts=4
 
-" PEP8
 set encoding=utf-8
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
@@ -112,11 +112,6 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix
 highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_use_clangd = 0
 
 " Syntax
 let python_highlight_all=1
@@ -136,10 +131,12 @@ set updatetime=250
 " Wrap guides
 autocmd FileType python,sql setlocal colorcolumn=89
 autocmd FileType tex setlocal colorcolumn=101
+autocmd FileType rst setlocal colorcolumn=101
 highlight ColorColumn guibg=red
 
 set textwidth=0 wrapmargin=0
 autocmd FileType tex setlocal textwidth=100
+autocmd FileType rst setlocal textwidth=100
 
 " Keybindings
 
@@ -175,7 +172,8 @@ nnoremap d "_d
 vnoremap d "_d
 vnoremap p "_dP
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256          " Remove this line if not necessary
-  source ~/.vimrc_background
-endif
+" Pydocstring
+let g:pydocstring_formatter = 'numpy'
+let g:pydocstring_doq_path = '/usr/local/bin/doq'
+let g:pydocstring_enable_mapping = 0
+nmap <silent> <leader><C-d> <Plug>(pydocstring)
