@@ -31,17 +31,14 @@ tic "$parent_dir/tmux-xterm-256color-italic.terminfo"
 
 echo Installing Nerd Fonts...
 brew tap caskroom/fonts
-brew cask install font-sourcecodepro-nerd-font
+brew install --cask font-sourcecodepro-nerd-font
 # Nerd fonts Source Code Pro version doesn't have italics so we install
 # the official version
-brew cask install font-source-code-pro
+brew install --cask font-source-code-pro
 
 echo Installing Python3 modules...
 pip3 install --user -r "$parent_dir"/python/requirements.txt
 ipython3 kernel install
-
-echo Setting up atom configuration...
-. "$current_dir/atom.sh"
 
 echo Installing zsh...
 . "$current_dir/zsh.sh"

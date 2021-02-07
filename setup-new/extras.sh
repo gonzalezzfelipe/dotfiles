@@ -12,3 +12,8 @@ if type "fzf" > /dev/null 2>&1; then
     )
     rm -rf fzf-marks
 fi
+
+# Chromance colors
+git clone \
+  https://github.com/aaron-williamson/base16-alacritty.git \
+  "$HOME/.aaron-williamson-alacritty-theme"

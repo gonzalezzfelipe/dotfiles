@@ -1,4 +1,5 @@
 # Note: mysql connector needs protobuf; see https://stackoverflow.com/a/43066829/2149400
+alacritty-colorscheme
 beautysh; python_version >= '3.6'
 cython
 flake8; python_version >= '3.6'
@@ -16,6 +17,7 @@ pip-review
 powerline-gitstatus; python_version >= '3.6'
 powerline-status; python_version >= '3.6'
 pyhive
+pynvim
 pytest; python_version >= '3.6'
 pytest-cov; python_version >= '3.6'
 pyyaml

@@ -1,34 +1,9 @@
-export ZSH=/Users/felipe/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="bullet-train"
-
-# Bullet Train Customizations
-BULLETTRAIN_VIRTUALENV_FG=black
-BULLETTRAIN_VIRTUALENV_BG=green
-BULLETTRAIN_CUSTOM_BG=blue
-
-BULLETTRAIN_GIT_BG=red
-BULLETTRAIN_GIT_FG=white
-BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR=yellow
-BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR=black
-
-BULLETTRAIN_CONTEXT_BG=white
-BULLETTRAIN_CONTEXT_FG=black
-
-BULLETTRAIN_TIME_BG=black
-BULLETTRAIN_TIME_FG=green
-
-BULLETTRAIN_PROMPT_ORDER=(
-  time
-  context
-  dir
-  virtualenv
-  git
-)
+ZSH_THEME="zeta"
 
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(git autojump tmux osx colorize)
+plugins=(git autojump tmux osx colorize yarn)
 
 # User configuration
 
@@ -98,7 +73,7 @@ if type "go" > /dev/null 2>&1; then
     export PATH=$PATH:$GOPATH/bin
 fi
 
-export EDITOR=atom
+export EDITOR=vim
 
 # }}}
 # Alias {{{
@@ -114,7 +89,6 @@ alias ll='ls -lah'
 alias q='exit'
 alias c='clear'
 alias o='open'
-alias rm='rm -v'
 alias sudo='sudo ' # Expand aliases when using sudo
 alias ssh='TERM=xterm-256color; ssh'
 alias ds='du -shc * | sort -rh'
@@ -236,11 +210,11 @@ use () {
     rm -rf "$_PATH"
   fi
   if [ ! -d "$_PATH" ]; then
-    virtualenv --system-site-packages $_PATH $PYTHON
+    virtualenv $_PATH $PYTHON
   fi
   source $_PATH/bin/activate
   if [ -f "$REQUIREMENTS" ]; then
-    pip install -I -r $REQUIREMENTS
+    pip install -r $REQUIREMENTS
   fi
 }
 
@@ -254,12 +228,12 @@ color_list() {
   done
 }
 
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include"
-export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/3.6/bin
-export PATH=$PATH:/Users/felipe/Library/Python/3.6/bin
+export PATH=$PATH:$HOME/Library/Python/3.6/bin
 
 copy_git_token() {
   echo $GIT_TOKEN | pbcopy
@@ -366,17 +340,17 @@ tm () {
   done
 
   local FILE=~/.teamocil/$NAME.yml
+  local THEME_CONFIG_FILE=~/.tmux/tmux.$ZSH_THEME.conf
+  local CONFIG_FILE=`echo $HOME/.tmux/tmux.conf`
 
-  # If a session exists with that name, then attach to it
-  if tmux ls | grep -q -E '^'$NAME':\s+.*'; then
-    tmux attach -t $NAME
-    return
+  if [ -f "$THEME_CONFIG_FILE" ]; then
+    export CONFIG_FILE=$THEME_CONFIG_FILE
   fi
 
   if [ -f "$FILE" ]; then
-    tmux -f "$HOME/.tmux/tmux.conf" new-session "teamocil $NAME"\; attach
+    tmux -f $CONFIG_FILE new -As -d "teamocil $NAME"\; attach
   else
-    tmux -f "$HOME/.tmux/tmux.conf" new -A -s $NAME
+    tmux -f $CONFIG_FILE new -As $NAME
   fi
 }
 
@@ -389,8 +363,9 @@ compctl -k "(--help --host --user --ip)" add_ssh_host
 # Add git token for commodity (never commit it)
 export GIT_TOKEN=
 
-# Support for Spark (java8)
-export PATH=/usr/local/adoptopenjdk/jdk8u222-b10/Contents/Home/bin:$PATH
+# Java stuff
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre
+export PATH=$HOME/.maven/bin:$PATH
 
 # GO path
 export GOPATH="${HOME}/.go"
@@ -399,3 +374,30 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # Multithreading issues
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# Move words with option key
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
+# Alacritty and Vim colorschemes
+chromance() {
+    if [ $# -eq 0 ]; then
+        alacritty-colorscheme \
+            -C ~/.aaron-williamson-alacritty-theme/colors \
+            -c ~/.alacritty.yml \
+            -s | sed -e 's@base16-\(.*\)\.yml@\1@'
+    else
+        alacritty-colorscheme \
+            -C ~/.aaron-williamson-alacritty-theme/colors \
+            -c ~/.alacritty.yml \
+            -V \
+            -a base16-$1.yml
+    fi
+}
+
+_get_chromance_schemes() {
+    reply=($(ls ~/.vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
+}
+compctl -K _get_chromance_schemes chromance
+
+alias gotosleep="sudo osascript -e 'tell application \"Finder\" to sleep'"

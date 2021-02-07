@@ -38,13 +38,6 @@ brew install python3
 # Tmux latest versions
 brew install --HEAD tmux
 
-# Install Atom
-brew tap caskroom/cask
-brew cask install atom
-
-# Docker
-brew install docker docker-compose
-
 # Databases
 brew install postgresql
 brew install mysql
@@ -68,9 +61,20 @@ brew install rsync
 brew install bat
 brew install fd
 brew install tree
+brew install ack-grep
+brew install jq
+brew install orc-tools
 
-# f.lux
-brew cask install flux
+# Cask
+brew tap caskroom/cask
+brew install --cask flux
+brew install --cask rectangle
+brew install --cask keepingyouawake
+brew install --cask monitorcontrol
+brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
+
+# Docker
+brew install docker docker-compose
 
 # Remove outdated versions
 brew cleanup
