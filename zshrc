@@ -381,22 +381,61 @@ bindkey "^[[1;3D" backward-word
 
 # Alacritty and Vim colorschemes
 chromance() {
-    if [ $# -eq 0 ]; then
-        alacritty-colorscheme \
-            -C ~/.aaron-williamson-alacritty-theme/colors \
-            -c ~/.alacritty.yml \
-            -s | sed -e 's@base16-\(.*\)\.yml@\1@'
-    else
-        alacritty-colorscheme \
-            -C ~/.aaron-williamson-alacritty-theme/colors \
-            -c ~/.alacritty.yml \
-            -V \
-            -a base16-$1.yml
-    fi
+  case "$1" in
+    -h|help|--help)
+      echo "Change colorscheme from both Alacritty and Vim."
+      echo ""
+      echo "In order for this to work you should add the 'chriskempson/base16-vim'"
+      echo "plugin and add the following lines to your vimrc:"
+      echo ""
+      echo "if filereadable(expand(\"~/.vimrc_background\"))"
+      echo "  let base16colorspace=256"
+      echo "  source ~/.vimrc_background"
+      echo "endif"
+      echo ""
+      echo ""
+      echo "Commands:"
+      echo "-h, help,--help           Show this help."
+      echo "init                      Download colorschemes and requirements."
+      echo "list                      Show list of available colorschemes."
+      kill -INT $$
+      ;;
+    init)
+      pip3 install alacritty-colorscheme
+      mkdir ~/.chromance
+      git clone \
+        https://github.com/aaron-williamson/base16-alacritty.git \
+        ~/.chromance
+      echo "Ended initialization, don't forget to add the following to your vimrc."
+      echo ""
+      echo "if filereadable(expand(\"~/.vimrc_background\"))"
+      echo "  let base16colorspace=256"
+      echo "  source ~/.vimrc_background"
+      echo "endif"
+      kill -INT $$
+      ;;
+    list)
+      ls ~/.vim/colors/base16-*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'
+      kill -INT $$
+      ;;
+  esac
+
+  if [ $# -eq 0 ]; then
+    alacritty-colorscheme \
+      -C ~/.chromance/colors \
+      -c ~/.alacritty.yml \
+      -s | sed -e 's@base16-\(.*\)\.yml@\1@'
+  else
+    alacritty-colorscheme \
+      -C ~/.chromance/colors \
+      -c ~/.alacritty.yml \
+      -V \
+      -a base16-$1.yml
+  fi
 }
 
 _get_chromance_schemes() {
-    reply=($(ls ~/.vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
+    reply=(init help list $(ls ~/.vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
 }
 compctl -K _get_chromance_schemes chromance
 
