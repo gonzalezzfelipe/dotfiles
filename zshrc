@@ -162,6 +162,7 @@ use () {
         echo "Options:"
         echo "-h, --help                Show brief help."
         echo "-p, --python PYTHON       Python executable to use to set up venv."
+        echo "-i, --install             Install dependencies."
         echo "-r, --requirements FILE   Specify requirements file to install."
         echo "--reset                   Erases current venv and sets up a new one"
         kill -INT $$
@@ -184,6 +185,10 @@ use () {
         local DELETE=1
         shift
         ;;
+      -i|--install)
+        local INSTALL=1
+        shift
+        ;;
       *)
         local NAME=$1
         shift
@@ -192,6 +197,7 @@ use () {
   done
   local RESET=${RESET:-0}
   local DELETE=${DELETE:-0}
+  local INSTALL=${INSTALL:-0}
   local REQUIREMENTS=${REQUIREMENTS:-requirements.txt}
 
   if [[ $NAME = "." ]]; then
@@ -213,9 +219,14 @@ use () {
     virtualenv $_PATH $PYTHON
   fi
   source $_PATH/bin/activate
-  if [ -f "$REQUIREMENTS" ]; then
-    pip install -r $REQUIREMENTS
+  if [ $INSTALL = 1 ]; then
+    if [ -f "$REQUIREMENTS" ]; then
+      pip install -r $REQUIREMENTS
+    else
+      echo "Requirements file not found."
+    fi
   fi
+  echo "Done."
 }
 
 docker_start() {
@@ -438,5 +449,11 @@ _get_chromance_schemes() {
     reply=(init help list $(ls ~/.vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
 }
 compctl -K _get_chromance_schemes chromance
+
+repo() {
+  # cd to repo folder.
+  cd ~/git-repos/$1
+}
+compctl -g '~/git-repos/*(:t:r)' repo
 
 alias gotosleep="sudo osascript -e 'tell application \"Finder\" to sleep'"

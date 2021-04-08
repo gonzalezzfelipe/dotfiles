@@ -41,6 +41,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plugin 'pseewald/vim-anyfold'
+Plugin 'lepture/vim-jinja'
 
 " Colorschemes ==> Compatible with chromance
 Plugin 'chriskempson/base16-vim'
@@ -112,6 +113,7 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix
 highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+au BufNewFile,BufRead *.j2 set ft=jinja
 
 " Syntax
 let python_highlight_all=1
