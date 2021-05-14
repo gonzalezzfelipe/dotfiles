@@ -23,24 +23,24 @@ font:
   # Style can be specified to pick a specific face.
   normal:
     # family: "Roboto Mono for Powerline"
-    family: "SauceCodePro Nerd Font"
+    family: SauceCodePro Nerd Font
     # family: "Ubuntu Mono derivative Powerline"
     # family: "Source Code Pro"
 
   # The bold font face
   bold:
-    # family: "Roboto Mono for Powerline"
-    family: "SauceCodePro Nerd Font"
-    # family: "Ubuntu Mono derivative Powerline"
+    family: Roboto Mono for Powerline
+    #family: SauceCodePro Nerd Font
+     #family: "Ubuntu Mono derivative Powerline"
     # family: "Source Code Pro"
 
   # The italic font face
   italic:
     # family: "Roboto Mono for Powerline"
-    family: "SauceCodePro Nerd Font"
+    family: SauceCodePro Nerd Font
     # family: "Ubuntu Mono derivative Powerline"
     # family: "Source Code Pro"
-    style: "Medium Italic"
+    style: Medium Italic
 
   # Point size of the font
   size: 13.0
@@ -134,7 +134,33 @@ debug:
 
 # Colors (Gruvbox light)
 schemes:
-  gruvbox_light: &gruvbox_light
+  nord:
+    # Default colors
+    primary:
+      background: '0x2E3440'
+      foreground: '0xD8DEE9'
+    # Normal colors
+    normal:
+      black: '0x3B4252'
+      red: '0xBF616A'
+      green: '0xA3BE8C'
+      yellow: '0xEBCB8B'
+      blue: '0x81A1C1'
+      magenta: '0xB48EAD'
+      cyan: '0x88C0D0'
+      white: '0xE5E9F0'
+    # Bright colors
+    bright:
+      black: '0x4C566A'
+      red: '0xBF616A'
+      green: '0xA3BE8C'
+      yellow: '0xEBCB8B'
+      blue: '0x81A1C1'
+      magenta: '0xB48EAD'
+      cyan: '0x8FBCBB'
+      white: '0xECEFF4'
+
+  gruvbox_light:
     # Default colors
     primary:
       # hard contrast: background = '#f9f5d7'
@@ -144,55 +170,68 @@ schemes:
 
     # Normal colors
     normal:
-      black:   '#fbf1c7'
-      red:     '#cc241d'
-      green:   '#98971a'
-      yellow:  '#d79921'
-      blue:    '#458588'
+      black: '#fbf1c7'
+      red: '#cc241d'
+      green: '#98971a'
+      yellow: '#d79921'
+      blue: '#458588'
       magenta: '#b16286'
-      cyan:    '#689d6a'
-      white:   '#7c6f64'
+      cyan: '#689d6a'
+      white: '#7c6f64'
 
     # Bright colors
     bright:
-      black:   '#928374'
-      red:     '#9d0006'
-      green:   '#79740e'
-      yellow:  '#b57614'
-      blue:    '#076678'
+      black: '#928374'
+      red: '#9d0006'
+      green: '#79740e'
+      yellow: '#b57614'
+      blue: '#076678'
       magenta: '#8f3f71'
-      cyan:    '#427b58'
-      white:   '#3c3836'
+      cyan: '#427b58'
+      white: '#3c3836'
   gruvbox_dark: &gruvbox_dark
-    # Default colors
+  # COLORSCHEME: base16-solarized-dark.yml
+  # Default colors
     primary:
       # hard contrast: background = '#1d2021'
-      background: '#282828'
-      # soft contrast: background = '#32302f'
-      foreground: '#ebdbb2'
+      background: '0x002b36'
+      foreground: '0x93a1a1'
 
-    # Normal colors
+  # Colors the cursor will use if `custom_cursor_colors` is true
     normal:
-      black:   '#282828'
-      red:     '#cc241d'
-      green:   '#98971a'
-      yellow:  '#d79921'
-      blue:    '#458588'
-      magenta: '#b16286'
-      cyan:    '#689d6a'
-      white:   '#a89984'
+      black: '0x002b36'
+      red: '0xdc322f'
+      green: '0x859900'
+      yellow: '0xb58900'
+      blue: '0x268bd2'
+      magenta: '0x6c71c4'
+      cyan: '0x2aa198'
+      white: '0x93a1a1'
 
-    # Bright colors
+  # Bright colors
     bright:
-      black:   '#928374'
-      red:     '#fb4934'
-      green:   '#b8bb26'
-      yellow:  '#fabd2f'
-      blue:    '#83a598'
-      magenta: '#d3869b'
-      cyan:    '#8ec07c'
-      white:   '#ebdbb2'
-  iceberg_dark: &iceberg_dark
+      black: '0x657b83'
+      red: '0xcb4b16'
+      green: '0x073642'
+      yellow: '0x586e75'
+      blue: '0x839496'
+      magenta: '0xeee8d5'
+      cyan: '0xd33682'
+      white: '0xfdf6e3'
+
+    cursor:
+      text: '0x002b36'
+      cursor: '0x93a1a1'
+
+  # Normal colors
+    indexed_colors:
+      - {index: 16, color: '0xde935f'}
+      - {index: 17, color: '0xa3685a'}
+      - {index: 18, color: '0x282a2e'}
+      - {index: 19, color: '0x373b41'}
+      - {index: 20, color: '0xb4b7b4'}
+      - {index: 21, color: '0xe0e0e0'}
+  iceberg_dark:
     # Default colors
     primary:
       background: '#161821'
@@ -200,26 +239,26 @@ schemes:
 
     # Normal colors
     normal:
-      black:   '#161821'
-      red:     '#e27878'
-      green:   '#b4be82'
-      yellow:  '#e2a478'
-      blue:    '#84a0c6'
+      black: '#161821'
+      red: '#e27878'
+      green: '#b4be82'
+      yellow: '#e2a478'
+      blue: '#84a0c6'
       magenta: '#a093c7'
-      cyan:    '#89b8c2'
-      white:   '#c6c8d1'
+      cyan: '#89b8c2'
+      white: '#c6c8d1'
 
     # Bright colors
     bright:
-      black:   '#6b7089'
-      red:     '#e98989'
-      green:   '#c0ca8e'
-      yellow:  '#e9b189'
-      blue:    '#91acd1'
+      black: '#6b7089'
+      red: '#e98989'
+      green: '#c0ca8e'
+      yellow: '#e9b189'
+      blue: '#91acd1'
       magenta: '#ada0d3'
-      cyan:    '#95c4ce'
-      white:   '#d2d4de'
-  iceberg_light: &iceberg_light
+      cyan: '#95c4ce'
+      white: '#d2d4de'
+  iceberg_light:
     # Default colors
     primary:
       background: '0xe8e9ec'
@@ -227,26 +266,26 @@ schemes:
 
     # Normal colors
     normal:
-      black:   '0xdcdfe7'
-      red:     '0xcc517a'
-      green:   '0x668e3d'
-      yellow:  '0xc57339'
-      blue:    '0x2d539e'
+      black: '0xdcdfe7'
+      red: '0xcc517a'
+      green: '0x668e3d'
+      yellow: '0xc57339'
+      blue: '0x2d539e'
       magenta: '0x7759b4'
-      cyan:    '0x3f83a6'
-      white:   '0x33374c'
+      cyan: '0x3f83a6'
+      white: '0x33374c'
 
     # Bright colors
     bright:
-      black:   '0x8389a3'
-      red:     '0xcc3768'
-      green:   '0x598030'
-      yellow:  '0xb6662d'
-      blue:    '0x22478e'
+      black: '0x8389a3'
+      red: '0xcc3768'
+      green: '0x598030'
+      yellow: '0xb6662d'
+      blue: '0x22478e'
       magenta: '0x6845ad'
-      cyan:    '0x327698'
-      white:   '0x262a3f'
-  monokai: &monokai
+      cyan: '0x327698'
+      white: '0x262a3f'
+  monokai:
     # Default colors
     primary:
       background: '#272822'
@@ -254,26 +293,26 @@ schemes:
 
     # Normal colors
     normal:
-     black:   '#272822'
-     red:     '#F92672'
-     green:   '#A6E22E'
-     yellow:  '#F4BF75'
-     blue:    '#66D9EF'
-     magenta: '#AE81FF'
-     cyan:    '#A1EFE4'
-     white:   '#F8F8F2'
+      black: '#272822'
+      red: '#F92672'
+      green: '#A6E22E'
+      yellow: '#F4BF75'
+      blue: '#66D9EF'
+      magenta: '#AE81FF'
+      cyan: '#A1EFE4'
+      white: '#F8F8F2'
 
     # Bright colors
     bright:
-     black:   '#75715E'
-     red:     '#F92672'
-     green:   '#A6E22E'
-     yellow:  '#F4BF75'
-     blue:    '#66D9EF'
-     magenta: '#AE81FF'
-     cyan:    '#A1EFE4'
-     white:   '#F9F8F5'
-  material: &material
+      black: '#75715E'
+      red: '#F92672'
+      green: '#A6E22E'
+      yellow: '#F4BF75'
+      blue: '#66D9EF'
+      magenta: '#AE81FF'
+      cyan: '#A1EFE4'
+      white: '#F9F8F5'
+  material:
     # Default colors
     primary:
       background: '#263238'
@@ -281,26 +320,26 @@ schemes:
 
     # Normal colors
     normal:
-      black:   '#000000'  # Arbitrary
-      red:     '#e53935'
-      green:   '#91b859'
-      yellow:  '#ffb62c'
-      blue:    '#6182b8'
+      black: '#000000'    # Arbitrary
+      red: '#e53935'
+      green: '#91b859'
+      yellow: '#ffb62c'
+      blue: '#6182b8'
       magenta: '#ff5370'  # Dark pink of the original material theme
-      cyan:    '#39adb5'
-      white:   '#a0a0a0'  # Arbitrary
+      cyan: '#39adb5'
+      white: '#a0a0a0'    # Arbitrary
 
     # Bright colors
     bright:
-      black:   '#4e4e4e'  # Arbitrary
-      red:     '#ff5370'
-      green:   '#c3e88d'
-      yellow:  '#ffcb6b'
-      blue:    '#82aaff'
+      black: '#4e4e4e'    # Arbitrary
+      red: '#ff5370'
+      green: '#c3e88d'
+      yellow: '#ffcb6b'
+      blue: '#82aaff'
       magenta: '#f07178'  # Pink of the original material theme
-      cyan:    '#89ddff'
-      white:   '#ffffff'  # Arbitrary
-  oceanic_next: &oceanic_next
+      cyan: '#89ddff'
+      white: '#ffffff'    # Arbitrary
+  oceanic_next:
     # Default colors
     primary:
       background: '#1b2b34'
@@ -313,23 +352,23 @@ schemes:
 
     # Normal colors
     normal:
-      black:   '#343d46'
-      red:     '#EC5f67'
-      green:   '#99C794'
-      yellow:  '#FAC863'
-      blue:    '#6699cc'
+      black: '#343d46'
+      red: '#EC5f67'
+      green: '#99C794'
+      yellow: '#FAC863'
+      blue: '#6699cc'
       magenta: '#c594c5'
-      cyan:    '#5fb3b3'
-      white:   '#d8dee9'
+      cyan: '#5fb3b3'
+      white: '#d8dee9'
 
     # Bright colors
     bright:
-      black:   '#343d46'
-      red:     '#EC5f67'
-      green:   '#99C794'
-      yellow:  '#FAC863'
-      blue:    '#6699cc'
+      black: '#343d46'
+      red: '#EC5f67'
+      green: '#99C794'
+      yellow: '#FAC863'
+      blue: '#6699cc'
       magenta: '#c594c5'
-      cyan:    '#5fb3b3'
-      white:   '#d8dee9'
-colors: *iceberg_light
+      cyan: '#5fb3b3'
+      white: '#d8dee9'
+colors: *gruvbox_dark
