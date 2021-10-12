@@ -243,8 +243,7 @@ export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
-export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/3.6/bin
-export PATH=$PATH:$HOME/Library/Python/3.6/bin
+export PATH=$PATH:$HOME/.local/bin
 
 copy_git_token() {
   echo $GIT_TOKEN | pbcopy
@@ -380,7 +379,7 @@ export PATH=$HOME/.maven/bin:$PATH
 
 # GO path
 export GOPATH="${HOME}/.go"
-export GOROOT="$(brew --prefix golang)/libexec"
+#export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # Multithreading issues
@@ -426,7 +425,7 @@ chromance() {
       kill -INT $$
       ;;
     list)
-      ls ~/.vim/colors/base16-*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'
+      ls ~/.vim/bundle/base16-vim/colors/base16-*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'
       kill -INT $$
       ;;
   esac
@@ -435,18 +434,18 @@ chromance() {
     alacritty-colorscheme \
       -C ~/.chromance/colors \
       -c ~/.alacritty.yml \
-      -s | sed -e 's@base16-\(.*\)\.yml@\1@'
+      status | sed -e 's@base16-\(.*\)\.yml@\1@'
   else
     alacritty-colorscheme \
       -C ~/.chromance/colors \
       -c ~/.alacritty.yml \
       -V \
-      -a base16-$1.yml
+      apply base16-$1.yml
   fi
 }
 
 _get_chromance_schemes() {
-    reply=(init help list $(ls ~/.vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
+    reply=(init help list $(ls ~/.vim/bundle/base16-vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
 }
 compctl -K _get_chromance_schemes chromance
 
