@@ -1,9 +1,10 @@
 export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="zeta"
+ZSH_DISABLE_COMPFIX=true
 
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(git autojump tmux osx colorize yarn)
+plugins=(git autojump tmux macos colorize yarn)
 
 # User configuration
 
@@ -93,13 +94,6 @@ alias sudo='sudo ' # Expand aliases when using sudo
 alias ssh='TERM=xterm-256color; ssh'
 alias ds='du -shc * | sort -rh'
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias pcli='ssh fgonzalez@prd-amber-pivot.jampp.com -t '\
-'tmux new -A -s fgonzalez-presto '\
-'"presto-cli\ --server\ emr-prd-data.jampp.com:8889\ --catalog\ hive\ '\
-'--schema\ aleph\ --user\ fgonzalez"'
-alias hcli="ssh fgonzalez@prd-amber-pivot.jampp.com -t "\
-"tmux new -A -s fgonzalez-hive "\
-"'beeline\ -u\ \"jdbc:hive2://emr-prd-etl.jampp.com:10000/default\;auth=noSasl\"\ -n\ hadoop'"
 
 # Git
 alias gs='git status'
@@ -243,11 +237,11 @@ export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
-export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/3.6/bin
+export PATH=$PATH:/Users/felipe/Library/Python/3.9//bin
 export PATH=$PATH:$HOME/Library/Python/3.6/bin
 
 copy_git_token() {
-  echo $GIT_TOKEN | pbcopy
+  cat ~/.credentials/github.token | pbcopy
 }
 
 
@@ -412,7 +406,7 @@ chromance() {
       kill -INT $$
       ;;
     init)
-      pip3 install alacritty-colorscheme
+      pip3 install alacritty-colorscheme==1.0.0
       mkdir ~/.chromance
       git clone \
         https://github.com/aaron-williamson/base16-alacritty.git \
@@ -426,7 +420,7 @@ chromance() {
       kill -INT $$
       ;;
     list)
-      ls ~/.vim/colors/base16-*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'
+      ls ~/.vim/bundle/base16-vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'
       kill -INT $$
       ;;
   esac
@@ -435,18 +429,18 @@ chromance() {
     alacritty-colorscheme \
       -C ~/.chromance/colors \
       -c ~/.alacritty.yml \
-      -s | sed -e 's@base16-\(.*\)\.yml@\1@'
+      status | sed -e 's@base16-\(.*\)\.yml@\1@'
   else
     alacritty-colorscheme \
       -C ~/.chromance/colors \
       -c ~/.alacritty.yml \
       -V \
-      -a base16-$1.yml
+      apply base16-$1.yml
   fi
 }
 
 _get_chromance_schemes() {
-    reply=(init help list $(ls ~/.vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
+    reply=(init help list $(ls ~/.vim/bundle/base16-vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
 }
 compctl -K _get_chromance_schemes chromance
 
@@ -457,3 +451,7 @@ repo() {
 compctl -g '~/git-repos/*(:t:r)' repo
 
 alias gotosleep="sudo osascript -e 'tell application \"Finder\" to sleep'"
+
+fix_pritunl() {
+  sudo kill -9 $(ps aux | grep Pritunl | grep 'type=utility' | sed -E "s@[A-z]+ +([0-9]+) +.*@\1@")
+}

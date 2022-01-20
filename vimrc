@@ -42,6 +42,8 @@ Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plugin 'pseewald/vim-anyfold'
 Plugin 'lepture/vim-jinja'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'jparise/vim-graphql'
 
 " Colorschemes ==> Compatible with chromance
 Plugin 'chriskempson/base16-vim'
@@ -54,6 +56,14 @@ let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 1
 autocmd FileType python setlocal completeopt-=preview
 
+"" ALE options
+let g:ale_linters = {
+\   'python': ['flake8', 'pylint', 'pyright', 'pydocstyle'],
+\}
+let g:ale_fixers = {
+\   'python': ['black', 'isort', 'remove_trailing_lines', 'trim_whitespace'],
+\}
+
 "" Colorschemes
 syntax enable
 
@@ -62,7 +72,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
- let g:lightline = {
+let g:lightline = {
      \ 'active': {
      \   'left': [ [ 'mode', 'paste' ],
      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -70,7 +80,7 @@ endif
      \ 'component_function': {
      \   'gitbranch': 'FugitiveHead'
      \ },
-   \ }
+\ }
 
 " Chromance
 if filereadable(expand("~/.vimrc_background"))
@@ -79,7 +89,7 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 " Spaces
-let g:NERDSpaceDelims = 0
+let g:NERDSpaceDelims = 1
 autocmd BufWritePre * %s/\s\+$//e
 set backspace=indent,eol,start
 
@@ -107,7 +117,6 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=88 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
@@ -120,7 +129,7 @@ let python_highlight_all=1
 syntax on
 
 " NerdTree
-let NERDTreeIgnore=['\.pyc$', '\.DS_Store']
+let NERDTreeIgnore=['\.pyc$', '\.DS_Store', '^__pycache__$']
 autocmd vimenter * NERDTree
 nnoremap <C-o> :NERDTreeToggle<enter>
 

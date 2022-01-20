@@ -30,11 +30,11 @@ echo Installing Italics tmux terminfo...
 tic "$parent_dir/tmux-xterm-256color-italic.terminfo"
 
 echo Installing Nerd Fonts...
-brew tap caskroom/fonts
-brew install --cask font-sourcecodepro-nerd-font
+brew tap homebrew/cask-fonts
 # Nerd fonts Source Code Pro version doesn't have italics so we install
 # the official version
-brew install --cask font-source-code-pro
+brew install font-source-code-pro
+brew install font-fantasque-sans-mono
 
 echo Installing Python3 modules...
 pip3 install --user -r "$parent_dir"/python/requirements.txt
