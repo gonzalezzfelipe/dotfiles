@@ -239,6 +239,7 @@ export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 export PATH=$PATH:/Users/felipe/Library/Python/3.9//bin
 export PATH=$PATH:$HOME/Library/Python/3.6/bin
+export PATH=$PATH:$HOME/.local/bin
 
 copy_git_token() {
   cat ~/.credentials/github.token | pbcopy
@@ -374,7 +375,7 @@ export PATH=$HOME/.maven/bin:$PATH
 
 # GO path
 export GOPATH="${HOME}/.go"
-export GOROOT="$(brew --prefix golang)/libexec"
+#export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # Multithreading issues
