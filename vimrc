@@ -24,13 +24,15 @@ else
 endif
 
 Plugin 'dense-analysis/ale'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'preservim/nerdcommenter'
 Plugin 'ervandew/supertab'
 Plugin 'mileszs/ack.vim'
@@ -42,11 +44,15 @@ Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plugin 'pseewald/vim-anyfold'
 Plugin 'lepture/vim-jinja'
-Plugin 'ryanoasis/vim-devicons'
 Plugin 'jparise/vim-graphql'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'jvirtanen/vim-hcl'
 
 " Colorschemes ==> Compatible with chromance
 Plugin 'chriskempson/base16-vim'
+
+" Should always be the last one
+" Plugin 'ryanoasis/vim-devicons'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -55,6 +61,9 @@ filetype plugin indent on    " required
 let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 1
 autocmd FileType python setlocal completeopt-=preview
+
+"" CtrlP ignores
+let g:ctrlp_custom_ignore = 'google-cloud-sdk'
 
 "" ALE options
 let g:ale_linters = {
@@ -112,7 +121,7 @@ set ts=2
 autocmd FileType make setlocal noexpandtab  " Dont expand on makefiles
 autocmd FileType python setlocal ts=4
 
-set encoding=utf-8
+set encoding=UTF-8
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
@@ -127,6 +136,7 @@ au BufNewFile,BufRead *.j2 set ft=jinja
 " Syntax
 let python_highlight_all=1
 syntax on
+au BufReadPost Jenkinsfile.* set syntax=groovy
 
 " NerdTree
 let NERDTreeIgnore=['\.pyc$', '\.DS_Store', '^__pycache__$']
@@ -188,3 +198,11 @@ let g:pydocstring_formatter = 'numpy'
 let g:pydocstring_doq_path = '/usr/local/bin/doq'
 let g:pydocstring_enable_mapping = 0
 nmap <silent> <leader><C-d> <Plug>(pydocstring)
+
+" NerdTree colors
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+
+let g:NERDTreeGitStatusConcealBrackets = 0
+let g:NERDTreeGitStatusUseNerdFonts = 0

@@ -4,12 +4,10 @@ ZSH_THEME="zeta"
 ZSH_DISABLE_COMPFIX=true
 
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(git autojump tmux macos colorize yarn)
+plugins=(git autojump tmux macos colorize yarn jira extract)
 
 # User configuration
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -34,7 +32,6 @@ fi
 
 if [[ "$OSTYPE" == 'darwin'* ]]; then
     # Path settings
-    PATH="/usr/bin:/bin:/usr/sbin:/sbin"
     export PATH="$brew_dir/bin:$brew_dir/sbin:$PATH" # homebrew
     if [ -d "/Library/TeX/texbin" ]; then
         export PATH="/Library/TeX/texbin:$PATH" # basictex
@@ -223,6 +220,8 @@ use () {
   echo "Done."
 }
 
+# Docker
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
 docker_start() {
   open --background -a Docker
 }
@@ -233,13 +232,19 @@ color_list() {
   done
 }
 
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
-export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
-export PATH=$PATH:/Users/felipe/Library/Python/3.9//bin
-export PATH=$PATH:$HOME/Library/Python/3.6/bin
-export PATH=$PATH:$HOME/.local/bin
+# SSL
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
+
+# LZ4
+export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/lz4/lib"
+export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/lz4/include"
+
+# GeoIP
+export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/geoip/lib"
+export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/geoip/include"
 
 copy_git_token() {
   cat ~/.credentials/github.token | pbcopy
@@ -456,3 +461,5 @@ alias gotosleep="sudo osascript -e 'tell application \"Finder\" to sleep'"
 fix_pritunl() {
   sudo kill -9 $(ps aux | grep Pritunl | grep 'type=utility' | sed -E "s@[A-z]+ +([0-9]+) +.*@\1@")
 }
+
+eval $(/opt/homebrew/bin/brew shellenv)
