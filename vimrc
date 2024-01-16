@@ -25,7 +25,6 @@ endif
 
 Plugin 'dense-analysis/ale'
 " Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
@@ -47,12 +46,34 @@ Plugin 'lepture/vim-jinja'
 Plugin 'jparise/vim-graphql'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'jvirtanen/vim-hcl'
+Plugin 'nvim-lua/plenary.nvim'
+Plugin 'nvim-telescope/telescope.nvim', { 'tag': '0.1.3' }
+Plugin 'iamcco/markdown-preview.nvim'
+Plugin 'tpope/vim-surround'
+Plugin 'preservim/tagbar'
 
 " Colorschemes ==> Compatible with chromance
 Plugin 'chriskempson/base16-vim'
 
 " Should always be the last one
 " Plugin 'ryanoasis/vim-devicons'
+
+" Black fixes
+let g:black_virtualenv="~/.vim/black"
+
+" Telescope and ctrlp
+if has('nvim')
+  nnoremap <leader>ff <cmd>Telescope find_files<cr>
+  nnoremap <C-p> <cmd>Telescope find_files<cr>
+  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  nnoremap <C-g> <cmd>Telescope live_grep<cr>
+else
+  Plugin 'kien/ctrlp.vim'
+  let g:ctrlp_custom_ignore = 'google-cloud-sdk\|qdrant_storage'
+endif
+
+" Tagbar
+nmap <C-t> :TagbarToggle<CR>
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -61,9 +82,6 @@ filetype plugin indent on    " required
 let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 1
 autocmd FileType python setlocal completeopt-=preview
-
-"" CtrlP ignores
-let g:ctrlp_custom_ignore = 'google-cloud-sdk'
 
 "" ALE options
 let g:ale_linters = {
@@ -76,7 +94,7 @@ let g:ale_fixers = {
 "" Colorschemes
 syntax enable
 
-set term=xterm-256color
+" set term=xterm-256color
 if (has("termguicolors"))
   set termguicolors
 endif

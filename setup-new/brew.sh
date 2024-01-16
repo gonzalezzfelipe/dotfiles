@@ -40,9 +40,6 @@ brew install --HEAD tmux
 
 # Databases
 brew install postgresql
-brew install mysql
-brew install protobuf  # Required by python's mysql-connector
-brew install redis
 
 # Other useful binaries
 brew install the_silver_searcher
@@ -67,14 +64,21 @@ brew install orc-tools
 
 # Cask
 brew tap caskroom/cask
-brew install --cask flux
 brew install --cask rectangle
 brew install --cask keepingyouawake
 brew install --cask monitorcontrol
-brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
 
 # Docker
-brew install docker docker-compose
+brew install --cask docker docker-compose
+
+# Nvim
+brew install nvim
+
+brew tap homebrew/cask-fonts
+# Nerd fonts Source Code Pro version doesn't have italics so we install
+# the official version
+brew install font-source-code-pro
+brew install font-fantasque-sans-mono
 
 # Remove outdated versions
 brew cleanup

@@ -323,47 +323,58 @@ add_ssh_host() {
   echo "SSH Host added succesfully!"
 }
 
+autoload -Uz compinit
+compinit
 tm () {
-  while test $# -gt 0; do
-    case "$1" in
-      -h|--help)
-        echo "This is an executable to open a new tmux window with previously configured panes and "
-        echo "windows, using the custom configuration."
-        echo ""
-        echo "Usage:"
-        echo ">>> tm NAME"
-        echo ""
-        echo "If the defined NAME is a configuration on the ~/.teamocil folder, then that will be"
-        echo "used. Else, a new TMUX session will be created with default initialization."
-        echo ""
-        echo "Args:"
-        echo "NAME                      Name of the configuration to load."
-        echo ""
-        echo "Options:"
-        echo "-h, --help                Show brief help."
-        kill -INT $$
-        ;;
-      *)
-        local NAME=$1
-        shift
-        ;;
-    esac
-  done
+  local opt
+  opt=(-f "$HOME/.tmux/tmux.conf")
 
-  local FILE=~/.teamocil/$NAME.yml
-  local THEME_CONFIG_FILE=~/.tmux/tmux.$ZSH_THEME.conf
-  local CONFIG_FILE=`echo $HOME/.tmux/tmux.conf`
+  case "$1" in
+    -c)
+      case "$2" in
+        trainline)
+          opt=(-f "$HOME/.tmux/tmux.trainline.conf")
+          ;;
+      esac
+      shift 2
+      ;;
+  esac
 
-  if [ -f "$THEME_CONFIG_FILE" ]; then
-    export CONFIG_FILE=$THEME_CONFIG_FILE
+  local session_name="$1"
+
+  # Check if session_name is defined
+  if [[ -z "$session_name" ]]; then
+    echo "Error: session_name is not defined."
+    return 1
   fi
 
-  if [ -f "$FILE" ]; then
-    tmux -f $CONFIG_FILE new -As -d "teamocil $NAME"\; attach
-  else
-    tmux -f $CONFIG_FILE new -As $NAME
-  fi
+  tmux "${opt[@]}" new-session -A -s "$session_name"
 }
+_tm_sessions() {
+    # Use tmux to get a list of open sessions
+    local sessions
+    sessions=($(tmux list-sessions -F '#S' 2>/dev/null))
+
+    # Set up completion based on the list of sessions
+    compadd -a sessions
+}
+# Define your tm function
+_tm() {
+    local -a options
+
+    # Define the options
+    options=(
+        '-c[Specify completion options]:completion options:(default trainline)'
+    )
+
+    # Set up completion for the -c option
+    _arguments $options && return
+
+    # If -c option is not specified, complete session_name
+    _tm_sessions
+}
+# Add completion for the tm function
+compdef _tm tm
 
 # Custom autocompletes
 compctl -g '~/.teamocil/*(:t:r)' teamocil
@@ -462,4 +473,9 @@ fix_pritunl() {
   sudo kill -9 $(ps aux | grep Pritunl | grep 'type=utility' | sed -E "s@[A-z]+ +([0-9]+) +.*@\1@")
 }
 
-eval $(/opt/homebrew/bin/brew shellenv)
+# eval $(/opt/homebrew/bin/brew shellenv)
+export PATH="/opt/homebrew/opt/libpq/bin:/Users/felipe/google-cloud-sdk/bin:$PATH"
+
+json_encode() {
+    python -c "import sys; import json; print(json.dumps(sys.stdin.read(), ensure_ascii=False))"
+}
