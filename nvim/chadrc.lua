@@ -2,8 +2,8 @@
 local M = {}
 
 M.ui = {
-  theme = 'onedark',
-  theme_toggle = { "onedark", "one_light" },
+  theme = 'monekai',
+  theme_toggle = { "monekai", "one_light" },
 }
 M.plugins = "custom.plugins"
 M.mappings = require "custom.mappings"

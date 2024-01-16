@@ -1,5 +1,9 @@
 local plugins = {
   {
+    "tpope/vim-surround",
+    lazy = false
+  },
+  {
     "christoomey/vim-tmux-navigator",
     lazy = false,
     cmd = {
