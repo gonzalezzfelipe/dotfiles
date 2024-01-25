@@ -475,6 +475,7 @@ fix_pritunl() {
 
 # eval $(/opt/homebrew/bin/brew shellenv)
 export PATH="/opt/homebrew/opt/libpq/bin:/Users/felipe/google-cloud-sdk/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"  # Rust
 
 json_encode() {
     python -c "import sys; import json; print(json.dumps(sys.stdin.read(), ensure_ascii=False))"
