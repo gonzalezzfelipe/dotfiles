@@ -40,12 +40,11 @@ if type "vim" > /dev/null 2>&1; then
 fi
 
 if type "nvim" > /dev/null 2>&1; then
-    ln -s "$dotfiles_dir/nvim/chadrc.lua" "$HOME/.config/nvim/lua/custom/chadrc.lua"
+    rm -rf "$HOME/.config/nvim/lua/custom/configs"
+    mkdir "$HOME/.config/nvim/lua/custom/configs"
+    ln -s "$dotfiles_dir/nvim/configs/*.lua" "$HOME/.config/nvim/lua/custom/configs/"
     ln -s "$dotfiles_dir/nvim/init.lua" "$HOME/.config/nvim/lua/custom/init.lua"
-    ln -s "$dotfiles_dir/nvim/lspconfig.lua" "$HOME/.config/nvim/lua/custom/lspconfig.lua"
     ln -s "$dotfiles_dir/nvim/mappings.lua" "$HOME/.config/nvim/lua/custom/mappings.lua"
-    ln -s "$dotfiles_dir/nvim/nullls.lua" "$HOME/.config/nvim/lua/custom/nullls.lua"
-    ln -s "$dotfiles_dir/nvim/nvimtree.lua" "$HOME/.config/nvim/lua/custom/nvimtree.lua"
     ln -s "$dotfiles_dir/nvim/plugins.lua" "$HOME/.config/nvim/lua/custom/plugins.lua"
     echo Created nvim symlinks
 fi

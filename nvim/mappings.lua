@@ -36,7 +36,10 @@ M.abc = {
     ["d"] = { "\"_d" },
 
     -- Folding
-    [" "] = { "za" }
+    [" "] = { "za" },
+
+    -- Show inlay hints
+    ["<leader>ih"] = { ":lua vim.lsp.inlay_hint.enable(0, true) <enter>" },
   },
 
   v = {

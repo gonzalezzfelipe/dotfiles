@@ -221,7 +221,7 @@ use () {
 }
 
 # Docker
-export DOCKER_DEFAULT_PLATFORM=linux/amd64
+export DOCKER_DEFAULT_PLATFORM=linux/arm
 docker_start() {
   open --background -a Docker
 }

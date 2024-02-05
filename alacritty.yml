@@ -142,243 +142,38 @@ debug:
   # Record all characters and escape sequences as test data.
   ref_test: false
 
-# Colors (Gruvbox light)
-schemes:
-  nord:
-    # Default colors
-    primary:
-      background: '0x2E3440'
-      foreground: '0xD8DEE9'
-    # Normal colors
-    normal:
-      black: '0x3B4252'
-      red: '0xBF616A'
-      green: '0xA3BE8C'
-      yellow: '0xEBCB8B'
-      blue: '0x81A1C1'
-      magenta: '0xB48EAD'
-      cyan: '0x88C0D0'
-      white: '0xE5E9F0'
-    # Bright colors
-    bright:
-      black: '0x4C566A'
-      red: '0xBF616A'
-      green: '0xA3BE8C'
-      yellow: '0xEBCB8B'
-      blue: '0x81A1C1'
-      magenta: '0xB48EAD'
-      cyan: '0x8FBCBB'
-      white: '0xECEFF4'
-
-  gruvbox_light:
-    # Default colors
-    primary:
-      # hard contrast: background = '#f9f5d7'
-      background: '#fbf1c7'
-      # soft contrast: background = '#f2e5bc'
-      foreground: '#3c3836'
-
-    # Normal colors
-    normal:
-      black: '#fbf1c7'
-      red: '#cc241d'
-      green: '#98971a'
-      yellow: '#d79921'
-      blue: '#458588'
-      magenta: '#b16286'
-      cyan: '#689d6a'
-      white: '#7c6f64'
-
-    # Bright colors
-    bright:
-      black: '#928374'
-      red: '#9d0006'
-      green: '#79740e'
-      yellow: '#b57614'
-      blue: '#076678'
-      magenta: '#8f3f71'
-      cyan: '#427b58'
-      white: '#3c3836'
-  gruvbox_dark: &gruvbox_dark
-  # COLORSCHEME: base16-monokai.yml
+# Colors
+colors:
+  # COLORSCHEME: base16-embers.yml
   # Default colors
-    primary:
-      # hard contrast: background = '#1d2021'
-      background: '0x272822'
-      foreground: '0xf8f8f2'
+  primary:
+    background: '0x16130f'
+    foreground: '0xa39a90'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
-    normal:
-      black: '0x272822'
-      red: '0xf92672'
-      green: '0xa6e22e'
-      yellow: '0xf4bf75'
-      blue: '0x66d9ef'
-      magenta: '0xae81ff'
-      cyan: '0xa1efe4'
-      white: '0xf8f8f2'
-
-  # Bright colors
-    bright:
-      black: '0x75715e'
-      red: '0xfd971f'
-      green: '0x383830'
-      yellow: '0x49483e'
-      blue: '0xa59f85'
-      magenta: '0xf5f4f1'
-      cyan: '0xcc6633'
-      white: '0xf9f8f5'
-
-    cursor:
-      text: '0x272822'
-      cursor: '0xf8f8f2'
+  cursor:
+    text: '0x16130f'
+    cursor: '0xa39a90'
 
   # Normal colors
-    indexed_colors:
-      - {index: 16, color: '0xde935f'}
-      - {index: 17, color: '0xa3685a'}
-      - {index: 18, color: '0x282a2e'}
-      - {index: 19, color: '0x373b41'}
-      - {index: 20, color: '0xb4b7b4'}
-      - {index: 21, color: '0xe0e0e0'}
-  iceberg_dark:
-    # Default colors
-    primary:
-      background: '#161821'
-      foreground: '#d2d4de'
+  normal:
+    black: '0x16130f'
+    red: '0x826d57'
+    green: '0x57826d'
+    yellow: '0x6d8257'
+    blue: '0x6d5782'
+    magenta: '0x82576d'
+    cyan: '0x576d82'
+    white: '0xa39a90'
 
-    # Normal colors
-    normal:
-      black: '#161821'
-      red: '#e27878'
-      green: '#b4be82'
-      yellow: '#e2a478'
-      blue: '#84a0c6'
-      magenta: '#a093c7'
-      cyan: '#89b8c2'
-      white: '#c6c8d1'
+  # Bright colors
+  bright:
+    black: '0x5a5047'
+    red: '0x828257'
+    green: '0x2c2620'
+    yellow: '0x433b32'
+    blue: '0x8a8075'
+    magenta: '0xbeb6ae'
+    cyan: '0x825757'
+    white: '0xdbd6d1'
 
-    # Bright colors
-    bright:
-      black: '#6b7089'
-      red: '#e98989'
-      green: '#c0ca8e'
-      yellow: '#e9b189'
-      blue: '#91acd1'
-      magenta: '#ada0d3'
-      cyan: '#95c4ce'
-      white: '#d2d4de'
-  iceberg_light:
-    # Default colors
-    primary:
-      background: '0xe8e9ec'
-      foreground: '0x33374c'
-
-    # Normal colors
-    normal:
-      black: '0xdcdfe7'
-      red: '0xcc517a'
-      green: '0x668e3d'
-      yellow: '0xc57339'
-      blue: '0x2d539e'
-      magenta: '0x7759b4'
-      cyan: '0x3f83a6'
-      white: '0x33374c'
-
-    # Bright colors
-    bright:
-      black: '0x8389a3'
-      red: '0xcc3768'
-      green: '0x598030'
-      yellow: '0xb6662d'
-      blue: '0x22478e'
-      magenta: '0x6845ad'
-      cyan: '0x327698'
-      white: '0x262a3f'
-  monokai:
-    # Default colors
-    primary:
-      background: '#272822'
-      foreground: '#F8F8F2'
-
-    # Normal colors
-    normal:
-      black: '#272822'
-      red: '#F92672'
-      green: '#A6E22E'
-      yellow: '#F4BF75'
-      blue: '#66D9EF'
-      magenta: '#AE81FF'
-      cyan: '#A1EFE4'
-      white: '#F8F8F2'
-
-    # Bright colors
-    bright:
-      black: '#75715E'
-      red: '#F92672'
-      green: '#A6E22E'
-      yellow: '#F4BF75'
-      blue: '#66D9EF'
-      magenta: '#AE81FF'
-      cyan: '#A1EFE4'
-      white: '#F9F8F5'
-  material:
-    # Default colors
-    primary:
-      background: '#263238'
-      foreground: '#eeffff'
-
-    # Normal colors
-    normal:
-      black: '#000000'    # Arbitrary
-      red: '#e53935'
-      green: '#91b859'
-      yellow: '#ffb62c'
-      blue: '#6182b8'
-      magenta: '#ff5370'  # Dark pink of the original material theme
-      cyan: '#39adb5'
-      white: '#a0a0a0'    # Arbitrary
-
-    # Bright colors
-    bright:
-      black: '#4e4e4e'    # Arbitrary
-      red: '#ff5370'
-      green: '#c3e88d'
-      yellow: '#ffcb6b'
-      blue: '#82aaff'
-      magenta: '#f07178'  # Pink of the original material theme
-      cyan: '#89ddff'
-      white: '#ffffff'    # Arbitrary
-  oceanic_next:
-    # Default colors
-    primary:
-      background: '#1b2b34'
-      foreground: '#d8dee9'
-
-    # Colors the cursor will use if `custom_cursor_colors` is true
-    cursor:
-      text: '#1b2b34'
-      cursor: '#ffffff'
-
-    # Normal colors
-    normal:
-      black: '#343d46'
-      red: '#EC5f67'
-      green: '#99C794'
-      yellow: '#FAC863'
-      blue: '#6699cc'
-      magenta: '#c594c5'
-      cyan: '#5fb3b3'
-      white: '#d8dee9'
-
-    # Bright colors
-    bright:
-      black: '#343d46'
-      red: '#EC5f67'
-      green: '#99C794'
-      yellow: '#FAC863'
-      blue: '#6699cc'
-      magenta: '#c594c5'
-      cyan: '#5fb3b3'
-      white: '#d8dee9'
-colors: *gruvbox_dark
