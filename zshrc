@@ -4,7 +4,7 @@ ZSH_THEME="zeta"
 ZSH_DISABLE_COMPFIX=true
 
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(git autojump tmux macos colorize yarn jira extract)
+plugins=(git autojump macos colorize yarn extract)
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
@@ -71,7 +71,7 @@ if type "go" > /dev/null 2>&1; then
     export PATH=$PATH:$GOPATH/bin
 fi
 
-export EDITOR=vim
+export EDITOR=nvim
 
 # }}}
 # Alias {{{
@@ -221,7 +221,7 @@ use () {
 }
 
 # Docker
-export DOCKER_DEFAULT_PLATFORM=linux/arm
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
 docker_start() {
   open --background -a Docker
 }
