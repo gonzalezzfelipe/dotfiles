@@ -139,6 +139,12 @@ local plugins = {
       "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim"
     }
+  },
+  {
+    "bfontaine/Brewfile.vim",
+    ft = {
+      "Brewfile"
+    }
   }
 }
 return plugins
