@@ -1,0 +1,14 @@
+[user]
+  name = gonzalezzfelipe
+  email = gonzalezz_felipe@hotmail.com
+[push]
+  default = simple
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore
+[web]
+  browser = start
+[credential]
+  helper = osxkeychain
+[init]
+  defaultBranch = main

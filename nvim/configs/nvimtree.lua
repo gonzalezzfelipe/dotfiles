@@ -26,7 +26,15 @@ local function my_on_attach(bufnr)
   vim.keymap.set('n', 'R', api.tree.reload, opts('Refresh'))
   vim.keymap.set('n', 'S', api.tree.search_node, opts('Search'))
   vim.keymap.set('n', 'u', api.fs.rename_full, opts('Rename: Full Path'))
-  vim.keymap.set('n', 'I', api.tree.toggle_custom_filter, opts('Toggle Filter: Hidden'))
+  vim.keymap.set(
+    'n',
+    'I',
+    function()
+      api.tree.toggle_custom_filter()
+      api.tree.toggle_gitignore_filter()
+    end,
+    opts('Toggle Filter: Hidden')
+  )
   vim.keymap.set('n', 'x', api.tree.close, opts('Close'))
   vim.keymap.set('n', 'y', api.fs.copy.filename, opts('Copy Name'))
   vim.keymap.set('n', 'Y', api.fs.copy.relative_path, opts('Copy Relative Path'))

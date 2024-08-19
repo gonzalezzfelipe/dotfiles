@@ -49,6 +49,13 @@ if type "nvim" > /dev/null 2>&1; then
     echo Created nvim symlinks
 fi
 
+if type "starship" > /dev/null 2>&1; then
+    rm -rf "$HOME/.config/starship.toml"
+    mkdir "$HOME/.config"
+    ln -s "$dotfiles_dir/config/starship.toml" "$HOME/.config/starship.toml"
+    echo Created .config/starship.toml symlink
+fi
+
 if type "ctags" > /dev/null 2>&1; then
     rm -rf "$HOME/.ctags"
     ln -s "$dotfiles_dir/ctags" "$HOME/.ctags"

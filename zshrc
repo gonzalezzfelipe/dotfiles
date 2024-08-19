@@ -1,6 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="zeta"
+ZSH_THEME=""
 ZSH_DISABLE_COMPFIX=true
 
 HIST_STAMPS="yyyy-mm-dd"
@@ -9,6 +9,7 @@ plugins=(git autojump macos colorize yarn extract)
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
 
+zstyle ':omz:alpha:lib:git' async-prompt no  # https://github.com/ohmyzsh/ohmyzsh/issues/12267
 source $ZSH/oh-my-zsh.sh
 
 # Options {{{
@@ -71,7 +72,7 @@ if type "go" > /dev/null 2>&1; then
     export PATH=$PATH:$GOPATH/bin
 fi
 
-export EDITOR=nvim
+export EDITOR=vim
 
 # }}}
 # Alias {{{
@@ -114,6 +115,10 @@ fi
 if type "bat" > /dev/null 2>&1; then
     # Colorized cat
     alias dog='bat --style numbers --theme TwoDark'
+fi
+
+if type "lsd" > /dev/null 2>&1; then
+    alias ls='lsd'
 fi
 
 if [[ "$OSTYPE" == 'darwin'* ]]; then
@@ -221,7 +226,6 @@ use () {
 }
 
 # Docker
-export DOCKER_DEFAULT_PLATFORM=linux/amd64
 docker_start() {
   open --background -a Docker
 }
@@ -248,79 +252,6 @@ export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/geoip/include"
 
 copy_git_token() {
   cat ~/.credentials/github.token | pbcopy
-}
-
-
-add_ssh_host() {
-  while test $# -gt 0; do
-    case "$1" in
-      --help)
-        echo "Add a host to ~/.ssh/config."
-        echo ""
-        echo "Options:"
-        echo "--help                    Show this help."
-        echo "-h, --host HOST           Name to define host."
-        echo "-u, --user USER           User to connect to host."
-        echo "-i, --ip IPADRESS         IP Adress of host."
-        echo "--interactive             Enable prompt to define this values."
-        echo ""
-        echo "Usage:"
-        echo "$ add_ssh_host -h NAME -u USER -i IP"
-        echo " "
-        kill -INT $$
-        ;;
-      -h|--host)
-        local _HOST=$2
-        shift
-        shift
-        ;;
-      -u|--user)
-        local _USER=$2
-        shift
-        shift
-        ;;
-      -i|--ip)
-        local _IP=$2
-        shift
-        shift
-        ;;
-      --interactive)
-        local INTERACTIVE=1
-        shift
-        ;;
-      *)
-        break
-        ;;
-    esac
-  done
-  local INTERACTIVE=${INTERACTIVE:-0}
-  if [[ $INTERACTIVE == 1 ]]; then
-    echo 'Host: '
-    read _HOST
-    echo 'User: '
-    read _USER
-    echo 'IP Adress: '
-    read _IP
-  fi
-  if [ -z $_HOST ]; then
-    echo "Error: Host must be defined."
-    kill -INT $$
-  fi
-  if [ -z $_USER ]; then
-    echo "Error: User must be defined."
-    kill -INT $$
-  fi
-  if [ -z $_IP ]; then
-    echo "Error: IP Adress must be defined."
-    kill -INT $$
-  fi
-  echo "" >> ~/.ssh/config
-  echo "Host "$_HOST  >> ~/.ssh/config
-  echo "  User "$_USER >> ~/.ssh/config
-  echo "  Hostname "$_IP >> ~/.ssh/config
-  echo "  ServerAliveInterval 30" >> ~/.ssh/config
-  echo "  ServerAliveCountMax 120" >> ~/.ssh/config
-  echo "SSH Host added succesfully!"
 }
 
 autoload -Uz compinit
@@ -380,14 +311,6 @@ compdef _tm tm
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 compctl -g '~/.teamocil/*(:t:r)' tm
 compctl -g '~/.venvs/*(:t:r)' use
-compctl -k "(--help --host --user --ip)" add_ssh_host
-
-# Add git token for commodity (never commit it)
-export GIT_TOKEN=
-
-# Java stuff
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre
-export PATH=$HOME/.maven/bin:$PATH
 
 # GO path
 export GOPATH="${HOME}/.go"
@@ -401,77 +324,12 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
-# Alacritty and Vim colorschemes
-chromance() {
-  case "$1" in
-    -h|help|--help)
-      echo "Change colorscheme from both Alacritty and Vim."
-      echo ""
-      echo "In order for this to work you should add the 'chriskempson/base16-vim'"
-      echo "plugin and add the following lines to your vimrc:"
-      echo ""
-      echo "if filereadable(expand(\"~/.vimrc_background\"))"
-      echo "  let base16colorspace=256"
-      echo "  source ~/.vimrc_background"
-      echo "endif"
-      echo ""
-      echo ""
-      echo "Commands:"
-      echo "-h, help,--help           Show this help."
-      echo "init                      Download colorschemes and requirements."
-      echo "list                      Show list of available colorschemes."
-      kill -INT $$
-      ;;
-    init)
-      pip3 install alacritty-colorscheme==1.0.0
-      mkdir ~/.chromance
-      git clone \
-        https://github.com/aaron-williamson/base16-alacritty.git \
-        ~/.chromance
-      echo "Ended initialization, don't forget to add the following to your vimrc."
-      echo ""
-      echo "if filereadable(expand(\"~/.vimrc_background\"))"
-      echo "  let base16colorspace=256"
-      echo "  source ~/.vimrc_background"
-      echo "endif"
-      kill -INT $$
-      ;;
-    list)
-      ls ~/.vim/bundle/base16-vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'
-      kill -INT $$
-      ;;
-  esac
-
-  if [ $# -eq 0 ]; then
-    alacritty-colorscheme \
-      -C ~/.chromance/colors \
-      -c ~/.alacritty.yml \
-      status | sed -e 's@base16-\(.*\)\.yml@\1@'
-  else
-    alacritty-colorscheme \
-      -C ~/.chromance/colors \
-      -c ~/.alacritty.yml \
-      -V \
-      apply base16-$1.yml
-  fi
-}
-
 _get_chromance_schemes() {
     reply=(init help list $(ls ~/.vim/bundle/base16-vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
 }
 compctl -K _get_chromance_schemes chromance
 
-repo() {
-  # cd to repo folder.
-  cd ~/git-repos/$1
-}
-compctl -g '~/git-repos/*(:t:r)' repo
-
 alias gotosleep="sudo osascript -e 'tell application \"Finder\" to sleep'"
-
-fix_pritunl() {
-  sudo kill -9 $(ps aux | grep Pritunl | grep 'type=utility' | sed -E "s@[A-z]+ +([0-9]+) +.*@\1@")
-}
 
 # eval $(/opt/homebrew/bin/brew shellenv)
 export PATH="/opt/homebrew/opt/libpq/bin:/Users/felipe/google-cloud-sdk/bin:$PATH"
@@ -480,3 +338,23 @@ export PATH="$HOME/.cargo/bin:$PATH"  # Rust
 json_encode() {
     python -c "import sys; import json; print(json.dumps(sys.stdin.read(), ensure_ascii=False))"
 }
+
+# Zoxide
+eval "$(zoxide init zsh --cmd cd)"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+export PATH="$PATH:/Users/felipe/.dmtr/bin"
+
+eval "$(starship init zsh)" 
+eval "$(mcfly init zsh)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/felipe/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/felipe/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/felipe/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/felipe/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"

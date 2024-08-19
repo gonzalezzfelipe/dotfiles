@@ -45,6 +45,8 @@ Icon?
 temp/
 temp.*
 
-
 # Docs
 _build
+
+# Python + NVim
+.null-ls*

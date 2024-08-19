@@ -51,12 +51,7 @@ Plugin 'nvim-telescope/telescope.nvim', { 'tag': '0.1.3' }
 Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'tpope/vim-surround'
 Plugin 'preservim/tagbar'
-
-" Colorschemes ==> Compatible with chromance
-Plugin 'chriskempson/base16-vim'
-
-" Should always be the last one
-" Plugin 'ryanoasis/vim-devicons'
+Plugin 'catppuccin/vim', { 'as': 'catppuccin' }
 
 " Black fixes
 let g:black_virtualenv="~/.vim/black"
@@ -92,6 +87,7 @@ let g:ale_fixers = {
 \}
 
 "" Colorschemes
+colorscheme catppuccin_mocha
 syntax enable
 
 " set term=xterm-256color
@@ -108,12 +104,6 @@ let g:lightline = {
      \   'gitbranch': 'FugitiveHead'
      \ },
 \ }
-
-" Chromance
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
 
 " Spaces
 let g:NERDSpaceDelims = 1

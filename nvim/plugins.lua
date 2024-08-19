@@ -12,7 +12,8 @@ local plugins = {
         "luaformatter",
         "lua-language-server",
         "terraform-ls",
-        "typescript-language-server"
+        "typescript-language-server",
+        "prisma-language-server"
       }
     }
   },
@@ -145,6 +146,34 @@ local plugins = {
     ft = {
       "Brewfile"
     }
-  }
+  },
+  {
+    'prisma/vim-prisma',
+    ft = {
+      "prisma"
+    }
+  },
+  {
+    "findango/vim-mdx",
+    ft = {
+      "mdx"
+    }
+  },
+  {
+    "imsnif/kdl.vim",
+    ft = {
+      "kdl"
+    }
+  },
+  {
+      "hiasr/vim-zellij-navigator.nvim",
+      config = function()
+          require('vim-zellij-navigator').setup()
+      end
+  },
+  {
+    "NoahTheDuke/vim-just",
+    ft = { "Justfile" }
+  },
 }
 return plugins

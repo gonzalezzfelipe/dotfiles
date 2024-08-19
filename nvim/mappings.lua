@@ -40,6 +40,9 @@ M.abc = {
 
     -- Show inlay hints
     ["<leader>ih"] = { ":lua vim.lsp.inlay_hint.enable(0, true) <enter>" },
+
+    -- Code actions
+    ["<leader>ca"] = { ":lua vim.lsp.buf.code_action() <enter>" },
   },
 
   v = {
