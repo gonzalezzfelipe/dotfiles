@@ -67,10 +67,11 @@ if type "tmux" > /dev/null 2>&1; then
     ln -s "$dotfiles_dir/tmux/teamocil" "$HOME/.teamocil"
     echo Created .tmux folder symlink
 fi
-if type "pip" > /dev/null 2>&1; then
-    rm -rf "$HOME/.config/pip"
-    ln -s "$dotfiles_dir/config/pip" "$HOME/.config/pip"
-    echo Created .config/pip folder symlink
+
+if type "zellij" > /dev/null 2>&1; then
+    rm -rf "$HOME/.config/zellij"
+    ln -s "$dotfiles_dir/config/zellij" "$HOME/.config/zellij"
+    echo Created .config/zellij folder symlink
 fi
 rm -rf "$HOME/.gitignore"
 ln -s "$dotfiles_dir/gitignore" "$HOME/.gitignore"

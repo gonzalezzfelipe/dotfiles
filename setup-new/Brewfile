@@ -53,6 +53,7 @@ brew "vim", link: false
 brew "wget"
 brew "z"
 brew "zoxide"
+brew "zellij"
 brew "zsh"
 brew "zsh-completions"
 
