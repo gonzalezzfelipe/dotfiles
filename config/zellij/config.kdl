@@ -169,7 +169,7 @@ keybinds {
               ignore_case true
           }
         }
-        bind "Ctrl /" {
+        bind "Ctrl Space" {
           LaunchOrFocusPlugin "forgot" {
               floating true
           }
