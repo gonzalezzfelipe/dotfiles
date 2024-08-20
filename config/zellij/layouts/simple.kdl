@@ -7,14 +7,14 @@ layout {
         plugin location="zjstatus" {
             hide_frame_for_single_pane "false"
 
-            // // Catpuccin
-            // color_bg "#1E1E2E"
-            // // Tokyo
+            // Catpuccin
+            color_bg "#1E1E2E"
+            // Tokyo
             // color_bg "#1a1b26"
             // Carbonfox
-            color_bg "#161616"
+            // color_bg "#161616"
 
-            color_main "colour6"
+            color_main "colour4"
 
             border_enabled  "true"
             border_char     "─"
