@@ -2,8 +2,8 @@
 local M = {}
 
 M.ui = {
-  theme = "catppuccin",
-  theme_toggle = { "ayu_light", "catppuccin" },
+  theme = "oxocarbon",
+  theme_toggle = { "ayu_light", "oxocarbon" },
 }
 M.plugins = "custom.plugins"
 M.mappings = require "custom.mappings"

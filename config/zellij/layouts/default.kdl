@@ -2,7 +2,12 @@ layout {
     default_tab_template {
         pane size=2 borderless=true {
             plugin location="zjstatus" {
-              color_bg "#1E1E2E"
+              // // Catpuccin
+              // color_bg "#1E1E2E"
+              // // Tokyo
+              // color_bg "#1a1b26"
+              // Carbonfox
+              color_bg "#161616"
 
               format_left   "#[bg=$bg]{mode}#[bg=$bg] {tabs}"
               format_center "{notifications}"

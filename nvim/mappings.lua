@@ -28,6 +28,7 @@ M.abc = {
       "Close buffer",
     },
     ["X"] = { ":q!<enter>" },
+
     -- Undo and redo
     ["<S-u>"] = { "<C-R>" },
     ["<C-s>"] = { ":w<enter>" },
