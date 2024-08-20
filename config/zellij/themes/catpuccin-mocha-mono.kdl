@@ -1,0 +1,32 @@
+// Catppuccin Theme:
+// https://github.com/catppuccin/catppuccin
+
+themes {
+  catppuccin-mocha-blue {
+    bg "#585b70" // Surface2
+    fg "#cdd6f4"
+    red "#f38ba8"
+    green "#89b4fa"
+    blue "#89b4fa"
+    yellow "#f9e2af"
+    magenta "#89dceb" // Pink
+    orange "#89b4fa" // Peach
+    cyan "#89dceb" // Sky
+    black "#181825" // Mantle
+    white "#cdd6f4"
+  }
+
+  catppuccin-mocha-green {
+    bg "#585b70" // Surface2
+    fg "#cdd6f4"
+    red "#f38ba8"
+    green "#a6e3a1"
+    blue "#a6e3a1"
+    yellow "#f9e2af"
+    magenta "#89dceb" // Pink
+    orange "#a6e3a1" // Peach
+    cyan "#89dceb" // Sky
+    black "#181825" // Mantle
+    white "#cdd6f4"
+  }
+}

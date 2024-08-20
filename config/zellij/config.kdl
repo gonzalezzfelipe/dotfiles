@@ -1,6 +1,7 @@
 pane_frames false
-theme "catppuccin-mocha"
-layout_dir "/Users/felipe/.config/zellij/layouts/"
+theme "catppuccin-mocha-blue"
+layout_dir "~/.config/zellij/layouts"
+theme_dir "/Users/felipe/.config/zellij/themes"
 
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds {
