@@ -108,6 +108,9 @@ alias gch='git checkout'
 alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
+# Terraform
+alias tf="terraform"  # No more terrafrom
+
 # Other binaries
 if type "htop" > /dev/null 2>&1; then
     alias ht='htop'
@@ -358,3 +361,5 @@ if [ -f '/Users/felipe/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/felipe/g
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/felipe/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/felipe/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+
+. "$HOME/.cargo/env"

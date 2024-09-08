@@ -6,9 +6,14 @@
 [core]
   editor = vim
   excludesfile = ~/.gitignore
+  pager = delta
 [web]
   browser = start
 [credential]
   helper = osxkeychain
 [init]
   defaultBranch = main
+[pull]
+  rebase = false
+[delta]
+  line-numbers = true
