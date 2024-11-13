@@ -103,3 +103,9 @@ program = "/bin/zsh"
 decorations = "full"
 opacity = 1.0
 startup_mode = "Fullscreen"
+
+[keyboard]
+bindings = [
+  { key = "Right", mods = "Alt", chars = "\u001BF" },
+  { key = "Left",  mods = "Alt", chars = "\u001BB" }
+]
