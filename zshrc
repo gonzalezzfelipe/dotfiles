@@ -342,6 +342,9 @@ json_encode() {
     python -c "import sys; import json; print(json.dumps(sys.stdin.read(), ensure_ascii=False))"
 }
 
+# K9s
+export K9S_CONFIG_DIR="$HOME/.config/k9s"
+
 # Zoxide
 eval "$(zoxide init zsh --cmd cd)"
 

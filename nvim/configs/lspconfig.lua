@@ -48,3 +48,11 @@ lspconfig.prismals.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
+
+lspconfig.dockerls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  on_attach = on_attach,
+  capabilities = capabilities,
+}

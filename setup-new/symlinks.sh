@@ -61,6 +61,14 @@ if type "ctags" > /dev/null 2>&1; then
     ln -s "$dotfiles_dir/ctags" "$HOME/.ctags"
     echo Created .ctags symlink
 fi
+
+if type "k9s" > /dev/null 2>&1; then
+    rm -rf "$HOME/.config/k9s"
+    ln -s "$dotfiles_dir/config/k9s" "$HOME/.config/k9s"
+    ln -s "$dotfiles_dir/config/k9s/skins" "$HOME/.config/k9s/skins"
+    echo Created .config/k9s folder symlink
+fi
+
 if type "tmux" > /dev/null 2>&1; then
     rm -rf "$HOME/.tmux"
     ln -s "$dotfiles_dir/tmux" "$HOME/.tmux"
