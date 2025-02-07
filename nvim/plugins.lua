@@ -174,6 +174,6 @@ local plugins = {
   {
     "NoahTheDuke/vim-just",
     ft = { "Justfile" }
-  },
+  }
 }
 return plugins

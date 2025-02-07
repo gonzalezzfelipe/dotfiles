@@ -81,6 +81,13 @@ if type "zellij" > /dev/null 2>&1; then
     ln -s "$dotfiles_dir/config/zellij" "$HOME/.config/zellij"
     echo Created .config/zellij folder symlink
 fi
+
+if type "ghostty" > /dev/null 2>&1; then
+    rm -rf "$HOME/.config/ghostty"
+    ln -s "$dotfiles_dir/config/ghostty" "$HOME/.config/ghostty"
+    echo Created .config/ghostty folder symlink
+fi
+
 rm -rf "$HOME/.gitignore"
 ln -s "$dotfiles_dir/gitignore" "$HOME/.gitignore"
 echo Created .gitignore symlink
