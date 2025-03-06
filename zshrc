@@ -371,3 +371,5 @@ if [ -f '/Users/felipe/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fe
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
 . "$HOME/.cargo/env"
+
+export GPG_TTY=$(tty)
