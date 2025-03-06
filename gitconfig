@@ -17,3 +17,5 @@
   rebase = false
 [delta]
   line-numbers = true
+[commit]
+	gpgsign = true

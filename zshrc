@@ -13,6 +13,11 @@ zstyle ':omz:alpha:lib:git' async-prompt no  # https://github.com/ohmyzsh/ohmyzs
 source $ZSH/oh-my-zsh.sh
 
 # Options {{{
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# FZF
+source <(fzf --zsh)
 
 # Brew directory
 if type "brew" > /dev/null 2>&1; then
