@@ -372,4 +372,4 @@ export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
 . "$HOME/.cargo/env"
 
-export GPG_TTY=$(tty)
+export GPG_TTY=$TTY
