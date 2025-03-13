@@ -12,7 +12,7 @@ k9s:
     crumbsless: false
     reactive: false
     noIcons: false
-    skin: "kanagawa"
+    skin: "catppuccin-mocha-transparent"
   skipLatestRevCheck: false
   disablePodCounting: false
   shellPod:

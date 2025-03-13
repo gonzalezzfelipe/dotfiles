@@ -31,15 +31,10 @@ local plugins = {
   },
   {
     "saecki/crates.nvim",
+    version = "^0.6.0",
     ft = { "toml" },
-    config = function(_, opts)
-      local crates = require("crates")
-      crates.setup(opts)
-      require("cmp").setup.buffer({
-        sources = { { name = "crates" } }
-      })
-      crates.show()
-      -- require("core.utils").load_mappings("crates")
+    config = function()
+        require('crates').setup()
     end,
   },
   {
