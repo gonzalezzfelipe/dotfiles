@@ -40,13 +40,9 @@ if type "vim" > /dev/null 2>&1; then
 fi
 
 if type "nvim" > /dev/null 2>&1; then
-    rm -rf "$HOME/.config/nvim/lua/custom/configs"
-    mkdir "$HOME/.config/nvim/lua/custom/configs"
-    ln -s "$dotfiles_dir/nvim/configs/*.lua" "$HOME/.config/nvim/lua/custom/configs/"
-    ln -s "$dotfiles_dir/nvim/init.lua" "$HOME/.config/nvim/lua/custom/init.lua"
-    ln -s "$dotfiles_dir/nvim/mappings.lua" "$HOME/.config/nvim/lua/custom/mappings.lua"
-    ln -s "$dotfiles_dir/nvim/plugins.lua" "$HOME/.config/nvim/lua/custom/plugins.lua"
-    echo Created nvim symlinks
+    rm -rf "$HOME/.config/nvim"
+    ln -s "$dotfiles_dir/config/nvim" "$HOME/.config/nvim"
+    echo Created .config/nvim folder symlink
 fi
 
 if type "starship" > /dev/null 2>&1; then

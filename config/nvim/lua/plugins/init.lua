@@ -20,13 +20,13 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+      require "configs.lspconfig"
+      require "nvchad.configs.lspconfig"
     end,
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^3",
+    version = "^6",
     ft = { "rust" },
   },
   {
@@ -66,7 +66,7 @@ local plugins = {
   {
     "nvim-tree/nvim-tree.lua",
     opts = function()
-      return require "custom.configs.nvimtree"
+      return require "nvchad.configs.nvimtree"
     end,
   },
   {
@@ -75,15 +75,8 @@ local plugins = {
       "python",
     },
     opts = function()
-      return require "custom.configs.nullls"
+      return require "nvchad.configs.nullls"
     end
-  },
-  {
-    "anuvyklack/pretty-fold.nvim",
-    config = function()
-      require('pretty-fold').setup()
-    end,
-    lazy = false
   },
   {
     "David-Kunz/gen.nvim",

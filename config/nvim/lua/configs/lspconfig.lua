@@ -1,5 +1,5 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
+local on_attach = require("nvchad.configs.lspconfig").on_attach
+local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
 local configs = require('lspconfig/configs')
@@ -37,11 +37,6 @@ lspconfig.terraformls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = { "tf", "terraform" },
-})
-
-lspconfig.tsserver.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
 })
 
 lspconfig.prismals.setup({
