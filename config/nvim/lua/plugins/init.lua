@@ -66,7 +66,7 @@ local plugins = {
   {
     "nvim-tree/nvim-tree.lua",
     opts = function()
-      return require "nvchad.configs.nvimtree"
+      return require "configs.nvimtree"
     end,
   },
   {
