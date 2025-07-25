@@ -373,3 +373,13 @@ export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 . "$HOME/.cargo/env"
 
 export GPG_TTY=$TTY
+
+export TX3_ROOT="/Users/felipe/.tx3"
+export PATH="$TX3_ROOT/default/bin:$PATH"
+
+# bun completions
+[ -s "/Users/felipe/.bun/_bun" ] && source "/Users/felipe/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
