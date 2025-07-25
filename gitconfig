@@ -1,6 +1,7 @@
 [user]
   name = Felipe Gonzalez
-  email = gonzalezz_felipe@hotmail.com
+  email = gonzalezzfelipe@gmail.com
+	signingkey = 8031873B07D7C2AB
 [push]
   default = simple
 [core]
