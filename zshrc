@@ -331,6 +331,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 # Move words with option key
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
+bindkey \^U backward-kill-line  # fix Ctrl-U: remove to the beginning of the line
 
 _get_chromance_schemes() {
     reply=(init help list $(ls ~/.vim/bundle/base16-vim/colors/base16-$1*.vim | sed -e 's@.*/base16-\(.*\)\.vim@\1@'))
