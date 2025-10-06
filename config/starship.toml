@@ -3,6 +3,7 @@ add_newline = false
 
 # Which is equivalent to
 format="""
+$hostname\
 $directory\
 $git_branch\
 $git_commit\
