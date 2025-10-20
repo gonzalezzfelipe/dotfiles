@@ -13,9 +13,9 @@ local plugins = {
         "lua-language-server",
         "terraform-ls",
         "typescript-language-server",
-        "prisma-language-server"
-      }
-    }
+        "prisma-language-server",
+      },
+    },
   },
   {
     "neovim/nvim-lspconfig",
@@ -34,7 +34,7 @@ local plugins = {
     version = "^0.6.0",
     ft = { "toml" },
     config = function()
-        require('crates').setup()
+      require("crates").setup()
     end,
   },
   {
@@ -42,11 +42,11 @@ local plugins = {
     ft = "rust",
     init = function()
       vim.g.rustfmt_autosave = 1
-    end
+    end,
   },
   {
     "tpope/vim-surround",
-    lazy = false
+    lazy = false,
   },
   {
     "christoomey/vim-tmux-navigator",
@@ -61,7 +61,7 @@ local plugins = {
   },
   {
     "tmux-plugins/vim-tmux-focus-events",
-    lazy = false
+    lazy = false,
   },
   {
     "nvim-tree/nvim-tree.lua",
@@ -76,14 +76,14 @@ local plugins = {
     },
     opts = function()
       return require "nvchad.configs.nullls"
-    end
+    end,
   },
   {
     "David-Kunz/gen.nvim",
     opts = {
-      model = "codellama"
+      model = "codellama",
     },
-    lazy = false
+    lazy = false,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -102,66 +102,70 @@ local plugins = {
         "query",
         "gitignore",
         "bash",
-        "terraform"
+        "terraform",
       },
-    }
+    },
   },
   {
     "ellisonleao/glow.nvim",
     ft = {
-      "markdown"
+      "markdown",
     },
     config = true,
-    cmd = "Glow"
+    cmd = "Glow",
   },
   {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
     config = function()
-      require("chatgpt").setup({
-        api_key_cmd = "cat /Users/felipe/.credentials/openapikey"
-      })
+      require("chatgpt").setup {
+        api_key_cmd = "cat /Users/felipe/.credentials/openapikey",
+      }
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
       "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
+      "nvim-telescope/telescope.nvim",
+    },
   },
   {
     "bfontaine/Brewfile.vim",
     ft = {
-      "Brewfile"
-    }
+      "Brewfile",
+    },
   },
   {
-    'prisma/vim-prisma',
+    "prisma/vim-prisma",
     ft = {
-      "prisma"
-    }
+      "prisma",
+    },
   },
   {
     "findango/vim-mdx",
     ft = {
-      "mdx"
-    }
+      "mdx",
+    },
   },
   {
     "imsnif/kdl.vim",
     ft = {
-      "kdl"
-    }
+      "kdl",
+    },
   },
   {
-      "hiasr/vim-zellij-navigator.nvim",
-      config = function()
-          require('vim-zellij-navigator').setup()
-      end
+    "hiasr/vim-zellij-navigator.nvim",
+    config = function()
+      require("vim-zellij-navigator").setup()
+    end,
   },
   {
     "NoahTheDuke/vim-just",
-    ft = { "Justfile" }
-  }
+    ft = { "Justfile" },
+  },
+  {
+    "rober-m/tx3-nvim",
+    ft = { "tx3" },
+  },
 }
 return plugins
