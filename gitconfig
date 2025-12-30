@@ -20,3 +20,5 @@
   line-numbers = true
 [commit]
 	gpgsign = true
+[gpg]
+	format = ssh
