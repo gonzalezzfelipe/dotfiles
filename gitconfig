@@ -1,7 +1,7 @@
 [user]
   name = Felipe Gonzalez
   email = gonzalezzfelipe@gmail.com
-	signingkey = 8031873B07D7C2AB
+	signingkey = /Users/felipe/.ssh/github.pub
 [push]
   default = simple
 [core]
